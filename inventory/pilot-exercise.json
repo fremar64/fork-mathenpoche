@@ -40,7 +40,8 @@
   "feedback": {
     "correct": "Bravo !",
     "first_incorrect": "Faux ! Encore un essai ! Utilise l'aide !",
-    "second_incorrect": "Non ! Regarde bien l'aide !"
+    "second_incorrect_training": "Non ! Regarde bien l'aide !",
+    "second_incorrect_evaluation": "Réponse incorrecte. Passe à la question suivante."
   },
   "modes": {
     "training": {
@@ -52,9 +53,22 @@
     "evaluation": {
       "label": "Évaluation",
       "timed": true,
+      "timer_display": "countdown",
+      "time_limit_minutes_by_profile": {
+        "CP": 15,
+        "CE1": 15,
+        "CE2": 15,
+        "CM1": 10,
+        "CM2": 10,
+        "6e": 10
+      },
+      "time_limit_status": "initial-values-adjustable-during-MVP-tests-with-students",
       "help_enabled": false,
       "place_value_table_enabled": false,
-      "feedback_after_first_error": "needs-specification"
+      "feedback_after_first_error": "needs-specification; must not suggest using unavailable help",
+      "feedback_after_second_error": "Réponse incorrecte. Passe à la question suivante.",
+      "after_second_error_action": "show Suite button; clicking continues to next question or opens final result with score and appraisal after question 10",
+      "timeout_behavior": "needs-MVP-test-specification"
     }
   },
   "difficulty_profiles": [
@@ -91,6 +105,12 @@
     "future_primary_levels": ["CP", "CE1", "CE2", "CM1", "CM2"],
     "future_secondary_levels": ["5e", "4e", "3e", "2nde"],
     "primary_profiles_can_use_compatible_6e_pilot_before_primary_archives_are_integrated": true
+  },
+  "deployment": {
+    "mvp_public_url": "https://rallye-maths.ceredis.net",
+    "dns_provider": "Cloudflare",
+    "dns_record_reported_created_by_project_owner": true,
+    "vercel_domain_verification_pending": true
   },
   "source_license": "GPL stated on the official Mathenpoche archive page; exact version and notices still require confirmation"
 }
