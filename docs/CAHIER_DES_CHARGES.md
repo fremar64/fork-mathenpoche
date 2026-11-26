@@ -28,7 +28,7 @@ Ces constats sont issus d’une première inspection des dossiers locaux. La pha
 6. Permettre à chaque élève connecté de consulter son propre tableau de bord, son historique et ses progrès.
 7. Publier le code source sur GitHub et déployer l’application web sur Vercel. Héberger les services Supabase sur l’infrastructure Coolify prévue par le porteur du projet.
 8. Respecter la licence et les attributions applicables aux contenus d’origine et aux dépendances réutilisées.
-9. Organiser l'apprentissage par notion : jeu sérieux de découverte, entraînement avec les exercices décontextualisés Mathenpoche, puis jeu sérieux final dans un contexte nouveau pour observer le transfert.
+9. Organiser les parcours par notion et niveau d'études : conceptualisation initiale inspirée de la TSD au CP ; extension du domaine des nombres par des exercices Mathenpoche aux niveaux suivants ; puis réinvestissement contextualisé selon un modèle de jeu adapté.
 
 ## 4. Hors périmètre initial
 
@@ -93,10 +93,12 @@ Ces constats sont issus d’une première inspection des dossiers locaux. La pha
 ### Parcours par notion
 
 - Présenter les deux familles dans un même catalogue : exercices Mathenpoche décontextualisés et jeux sérieux contextualisés conçus pour le fork.
-- Pour une notion, proposer le parcours de référence : jeu de découverte, synthèse ou institutionnalisation avec l'enseignant, entraînement par exercices Mathenpoche, puis jeu d'évaluation contextualisé dans un nouveau contexte.
-- Le jeu initial vise la conceptualisation de la notion ; le jeu final mobilise le même modèle mathématique dans une situation différente pour observer le transfert.
+- Organiser les parcours par notion et par niveau d'études, sans imposer un jeu de découverte identique à toutes les classes.
+- Au CP, proposer un jeu inspiré de la situation fondamentale du dénombrement pour soutenir la conceptualisation initiale, puis une synthèse avec l'enseignant et des exercices Mathenpoche.
+- À partir du CE1, partir de connaissances primitives des nombres naturels déjà conceptualisées ; utiliser les exercices Mathenpoche pour étendre le domaine des nombres maîtrisés, puis proposer un jeu de réinvestissement contextualisé conçu selon un modèle adapté à ces niveaux.
+- Le jeu CP inspiré de la TSD et les jeux de vie courante pour les niveaux avancés sont des modèles distincts. Les modalités d'évaluation des jeux contextualisés seront définies après leur prototypage et l'observation des activités réelles des élèves.
 - Les mécanismes ludiques servent la résolution mathématique : le contexte et les rétroactions rendent la connaissance utile, plutôt que d'ajouter seulement des points ou un décor à une série de questions.
-- Présenter les résultats d'entraînement et l'indicateur de transfert séparément dans les tableaux de bord. Le barème des jeux de transfert est défini pour chaque jeu et n'hérite pas automatiquement du seuil de 80 % des exercices.
+- Présenter les résultats d'entraînement et les traces de réinvestissement contextualisé séparément dans les tableaux de bord. Ne pas fixer a priori les critères d'évaluation du jeu avancé ni lui appliquer automatiquement le seuil de 80 % des exercices.
 
 ### Connexion faible
 
@@ -124,7 +126,7 @@ Ces constats sont issus d’une première inspection des dossiers locaux. La pha
 - Moteur partagé pour le cadre commun : consigne, aides, validation, retour, progression locale et instrumentation.
 - Exercices organisés par familles pédagogiques et interactives. Chaque famille peut avoir son propre composant ou moteur ; ne pas forcer une abstraction générique avant d’avoir porté plusieurs exercices représentatifs.
 - Métadonnées et contenu pédagogique versionnés dans le dépôt sous des formats contrôlables (JSON/TypeScript/Markdown selon le besoin). La base n’est pas la source de vérité pour le catalogue public.
-- Le catalogue relie les activités à une notion, à une famille d'activité (exercice Mathenpoche ou jeu sérieux), à un rôle dans le parcours (découverte, entraînement, transfert/évaluation) et à un profil de difficulté scolaire indépendant de l'archive source.
+- Le catalogue relie les activités à une notion, à une famille d'activité (exercice Mathenpoche ou jeu sérieux), à un rôle adapté au parcours (conceptualisation initiale, entraînement, réinvestissement contextualisé) et à un profil de difficulté scolaire indépendant de l'archive source.
 - Images, sons et autres ressources utilisées par les exercices servis depuis l’application ou un stockage adapté, avec attribution et optimisation.
 
 ### Supabase sur Coolify
@@ -153,11 +155,11 @@ Les exercices eux-mêmes restent dans le dépôt. La base ne conserve que les do
 - `classes` : professeur propriétaire, nom non sensible, paramètres.
 - `class_members` : rattachement d’un compte élève à une classe, état du compte et pseudonyme éventuel.
 - `assignments` : exercices ou séries attribués par un professeur à une classe ou à un élève, échéance éventuelle et état d’avancement.
-- `learning_paths` : notion visée et séquence d'activités reliées, avec le rôle de découverte, d'entraînement ou de transfert/évaluation.
+- `learning_paths` : notion et niveau d'études visés, activités reliées et rôle adapté au parcours (conceptualisation initiale, entraînement, réinvestissement contextualisé).
 - `attempts` : compte élève, activité, famille/type, résultat utile, nombre d'essais si nécessaire et horodatage ; conserver une durée seulement si elle sert à un objectif pédagogique explicite.
-- Chaque résultat suivi doit identifier le mode (Entraînement ou Évaluation), le score obtenu et le maximum, le taux de réussite, le profil de difficulté choisi, le caractère complet ou interrompu de la tentative et, pour une Évaluation chronométrée, la durée. Ces données alimentent séparément le suivi des savoir-faire et les résultats de transfert ; ne pas les présenter comme un diagnostic général des capacités de l'élève.
-- `competency_progress` (vue ou projection dérivée des tentatives) : état de validation par élève, activité et niveau d'études choisi. Une tentative complète à au moins 80 % valide ce niveau ; une tentative incomplète à expiration ne le valide jamais. Une tentative suivante peut mettre à jour cet état après entraînement et nouvelle réalisation.
-- `transfer_evidence` (vue ou projection dérivée des tentatives de jeu) : résultats au jeu contextualisé final, reliés à la notion et au scénario de transfert, selon le barème propre à ce jeu.
+- Chaque résultat suivi doit identifier le mode (Entraînement ou Évaluation), le score obtenu et le maximum, le taux de réussite, le profil de difficulté choisi, le caractère complet ou interrompu de la tentative et, pour une Évaluation chronométrée, la durée. Ces données alimentent séparément le suivi des savoir-faire et les traces de réinvestissement contextualisé ; ne pas les présenter comme un diagnostic général des capacités de l'élève.
+- `exercise_competency_progress` (vue ou projection dérivée des tentatives Mathenpoche) : état de validation par élève, exercice et niveau d'études choisi. Une tentative complète à au moins 80 % valide ce niveau ; une tentative incomplète à expiration ne le valide jamais. Cette règle ne valide pas automatiquement les résultats d'un jeu contextualisé.
+- `contextual_reinvestment_evidence` (vue ou projection dérivée des tentatives de jeu) : observations et résultats au jeu contextualisé, reliés à la notion, au profil de difficulté et au scénario ; les critères restent propres au jeu et ne seront fixés qu'après son observation.
 - `teacher_paths` : parcours personnalisés référençant les identifiants d’exercices du catalogue versionné.
 - Vues ou requêtes de synthèse pour le tableau de bord professeur (par classe et par élève) et le tableau de bord élève (ses propres résultats uniquement).
 
@@ -203,9 +205,9 @@ Un lecteur Ruffle peut servir à comparer ou consulter temporairement les ancien
 
 ### Phase 1 — prototype pédagogique
 
-- Prototyper un parcours complet autour des nombres entiers naturels : jeu sérieux de découverte, exercice 2 de Numérique, chapitre 1, série 1, niveau 6e, et jeu sérieux d'évaluation du transfert dans une situation nouvelle. La fiche de l'exercice Mathenpoche est dans [`PILOTE-6E-CHAP1-SERIE1-EXO2.md`](PILOTE-6E-CHAP1-SERIE1-EXO2.md) ; les deux jeux nécessitent leurs propres fiches de conception pédagogique.
+- Définir un parcours différencié autour des nombres naturels : jeu de conceptualisation initiale inspiré de la TSD pour le CP ; exercice 2 de Numérique, chapitre 1, série 1 de l'archive 6e utilisé avec les profils CP à 6e ; jeu contextualisé de vie courante pour les niveaux plus avancés, dont le modèle est distinct du jeu CP. La fiche de l'exercice est dans [`PILOTE-6E-CHAP1-SERIE1-EXO2.md`](PILOTE-6E-CHAP1-SERIE1-EXO2.md) ; les deux jeux ont des fiches de conception séparées.
 - Créer le squelette Next.js, le catalogue, le gabarit d’exercice et un premier portage HTML5, comprenant les deux modes et les profils de difficulté configurables prévus pour le pilote.
-- Définir le modèle de catalogue et de parcours par notion, avec des résultats séparés pour l'entraînement procédural et le transfert contextualisé.
+- Définir le catalogue et les parcours différenciés par notion et niveau d'études, avec des résultats d'entraînement distincts des traces de réinvestissement en contexte.
 - Mesurer poids, affichage mobile, usage clavier/tactile, animations du starter et comportement sur connexion lente.
 - Ne pas activer le suivi individuel réel à ce stade ; définir toutefois le contrat de données des tentatives et les besoins des deux tableaux de bord pour éviter une migration coûteuse.
 
@@ -214,7 +216,7 @@ Un lecteur Ruffle peut servir à comparer ou consulter temporairement les ancien
 ### Phase 2 — MVP public
 
 - Publier le premier corpus issu de l'archive Mathenpoche 6e et sa navigation complète ; préparer le catalogue à accueillir les niveaux du primaire et 5e à 2nde par étapes.
-- Présenter les activités des deux familles et un premier parcours complet, de la découverte contextualisée à l'entraînement, puis à l'évaluation de transfert.
+- Présenter les deux familles d'activités et les parcours adaptés : conceptualisation initiale au CP, extension du domaine des nombres par exercices aux niveaux suivants, puis réinvestissement en contexte selon un modèle de jeu adapté.
 - Rendre disponibles, dans les activités compatibles, les profils de difficulté CP, CE1, CE2, CM1, CM2 et 6e, indépendamment du niveau de provenance du contenu.
 - Porter une petite sélection d’exercices par familles identifiées ; afficher clairement l’état de couverture.
 - Ajouter recherche simple, liens directs, progression locale facultative et documentation de contribution. Les exercices restent entièrement utilisables sans compte.
@@ -230,7 +232,7 @@ Un lecteur Ruffle peut servir à comparer ou consulter temporairement les ancien
 - Ajouter l’authentification professeur, la création et gestion sécurisées des comptes élèves, les classes, les parcours attribués et l’enregistrement des tentatives.
 - Ajouter le tableau de bord professeur : classes, élèves, travaux attribués, avancement et progrès individuels, avec filtres par classe, élève, période et exercice lorsque pertinent.
 - Ajouter le tableau de bord élève : progrès par activité et niveau de difficulté/études, niveaux de compétence validés ou restant à travailler, historique de ses exercices et travaux attribués.
-- Séparer dans les tableaux de bord les validations de savoir-faire obtenues par les exercices et les résultats au jeu contextualisé de transfert.
+- Séparer dans les tableaux de bord les validations de savoir-faire obtenues par les exercices et les observations de réinvestissement contextualisé ; ne définir le barème d'un jeu avancé qu'après observation des élèves.
 - Vérifier les permissions par rôle et par classe ; un professeur ne voit que ses classes, et un élève seulement ses propres résultats.
 - Garder les exercices publics et la progression locale accessibles sans compte.
 
@@ -268,8 +270,8 @@ Un lecteur Ruffle peut servir à comparer ou consulter temporairement les ancien
 - Le tableau de bord professeur montre les classes qui lui appartiennent, les travaux attribués et les progrès de ses élèves.
 - Le tableau de bord élève ne révèle que ses propres données ; ses progrès sont conservés après déconnexion et reconnexion.
 - Les résultats permettent de situer l'élève sur les activités ou notions réalisées et de suivre son évolution ; les modes, scores, taux et durées d'évaluation utiles sont distingués.
-- Le tableau de bord valide un niveau de compétence pour une activité et un profil d'études seulement après une tentative complète avec au moins 80 % de réussite ; une évaluation terminée par expiration reste non validée.
-- Le catalogue peut relier le jeu de découverte, les exercices d'entraînement Mathenpoche et le jeu final de transfert d'une même notion ; les résultats procéduraux et les résultats de transfert sont distingués.
+- Le tableau de bord valide un niveau de savoir-faire Mathenpoche pour un profil d'études seulement après une tentative complète avec au moins 80 % de réussite ; une évaluation terminée par expiration reste non validée. Les jeux contextualisés ont un suivi distinct et aucun seuil prédéfini.
+- Le catalogue adapte la progression par notion et niveau d'études : jeu TSD de conceptualisation au CP, exercices Mathenpoche d'extension des nombres pour les niveaux avancés, puis jeu contextualisé selon un autre modèle. Les résultats procéduraux et les observations en contexte sont distingués.
 - Les autorisations ont été vérifiées avec des comptes de test couvrant plusieurs professeurs, plusieurs classes et plusieurs élèves.
 - Une procédure de sauvegarde et une restauration de Supabase ont été démontrées avant le suivi réel d’élèves.
 
@@ -297,7 +299,7 @@ Un lecteur Ruffle peut servir à comparer ou consulter temporairement les ancien
 6. Définir les champs minimaux des comptes élèves, le mode de création/remise des identifiants, les règles de récupération et la procédure de consentement/autorisation adaptée aux établissements et pays pilotes.
 7. Vérifier les règles de confidentialité et les durées de conservation des données de progrès avant le pilote.
 8. Vérifier la licence exacte de chaque corpus et composant réutilisé, ainsi que les obligations de redistribution du fork.
-9. Concevoir avec des enseignants les scénarios des jeux de découverte et de transfert sur les nombres entiers naturels, leurs rétroactions, leurs variables didactiques et leur grille d'évaluation du transfert.
+9. Concevoir avec des enseignants le jeu TSD de conceptualisation initiale pour le CP et le jeu immersif contextualisé pour les niveaux plus avancés ; observer les actions des élèves avant de définir les modalités d'évaluation du second jeu.
 
 Les règles du premier exercice, y compris ses profils de difficulté et les points à faire valider pédagogiquement, sont détaillées dans [`PILOTE-6E-CHAP1-SERIE1-EXO2.md`](PILOTE-6E-CHAP1-SERIE1-EXO2.md).
 
