@@ -11,6 +11,7 @@ La Phase 0 est terminée et le pilote est spécifié. Le dépôt ne contient pas
 Voir :
 
 - [`docs/CAHIER_DES_CHARGES.md`](docs/CAHIER_DES_CHARGES.md) — objectifs et exigences produit ;
+- [`docs/STRATEGIE-PEDAGOGIQUE.md`](docs/STRATEGIE-PEDAGOGIQUE.md) — deux familles d'activités et parcours d'apprentissage par notion ;
 - [`docs/PHASE0.md`](docs/PHASE0.md) — provenance, sauvegarde et installation historique ;
 - [`docs/PILOTE-6E-CHAP1-SERIE1-EXO2.md`](docs/PILOTE-6E-CHAP1-SERIE1-EXO2.md) — fiche fonctionnelle de l'exercice pilote ;
 - [`docs/ARCHITECTURE_DECISIONS.md`](docs/ARCHITECTURE_DECISIONS.md) — décisions prises et points à confirmer ;
