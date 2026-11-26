@@ -1,6 +1,3 @@
-Failed to create stream fd: Operation not permitted
-Failed to create stream fd: Operation not permitted
-Failed to create stream fd: Operation not permitted
 # Décisions d'architecture — journal initial
 
 | ID | Décision | Motif / portée | État |
