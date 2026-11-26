@@ -83,7 +83,7 @@ Ces constats sont issus d’une première inspection des dossiers locaux. La pha
 - Pour les activités où le niveau de difficulté est paramétrable, choix explicite d'un profil de difficulté, indépendant du niveau du catalogue et du niveau de l'archive source ; le professeur peut verrouiller ce réglage pour un travail attribué.
 - Pour un exercice à un point par question, une réponse correcte au premier ou au deuxième essai rapporte le point ; deux erreurs consécutives laissent à zéro la question concernée sans retirer de point déjà gagné. À la fin, afficher le taux de réussite et l'appréciation pédagogique prévue pour l'exercice.
 - Zone d’interaction adaptée à la famille d’exercice.
-- Aide et correction accessibles à la demande.
+- Aide et correction accessibles selon le mode choisi ; aucune aide ni aucun tableau d'aide en mode Évaluation.
 - Retour compréhensible après une réponse, possibilité de réessayer et indication du score si pertinent.
 - Contrôles utilisables au clavier et au toucher ; taille de texte et contraste lisibles.
 - Préférence pour des médias légers et des ressources locales plutôt que des dépendances distantes.
