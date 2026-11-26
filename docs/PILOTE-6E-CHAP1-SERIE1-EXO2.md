@@ -10,7 +10,7 @@ L'URL fournie, `pages/numerique/chap1/serie1/index.html`, est la page d'une sér
 
 Le contenu source du MVP pilote vient de l'archive Mathenpoche 6e. Le niveau d'archive indique la provenance et le classement du contenu, pas le niveau de difficulté imposé à l'élève. Cette activité de numération doit pouvoir être réglée pour des élèves du CP à la 6e ; le menu de difficulté choisit l'ordre de grandeur des nombres indépendamment du niveau de catalogue.
 
-Dans le parcours sur les nombres entiers naturels, cet exercice décontextualisé occupe la phase d'entraînement entre un jeu sérieux de découverte et un jeu sérieux final d'évaluation du transfert. La conception de ces deux jeux et les principes pédagogiques du parcours sont décrits dans [`STRATEGIE-PEDAGOGIQUE.md`](STRATEGIE-PEDAGOGIQUE.md) ; ils restent à concevoir séparément.
+Dans le parcours sur les nombres naturels, cet exercice décontextualisé occupe la phase d'entraînement pour les profils de difficulté CP à 6e. Au CP, il peut suivre un jeu de conceptualisation initiale inspiré de la situation fondamentale du dénombrement ; pour les niveaux plus avancés, il contribue à étendre le domaine des nombres maîtrisés avant un jeu contextualisé construit selon un autre modèle. Les scénarios et principes pédagogiques sont décrits dans [`STRATEGIE-PEDAGOGIQUE.md`](STRATEGIE-PEDAGOGIQUE.md) ; ils restent à concevoir séparément.
 
 Fichiers repérés dans les archives locales :
 
