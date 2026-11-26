@@ -7,7 +7,7 @@
 
 Créer un fork libre, gratuit d’accès et utilisable sur le web des exercices Mathenpoche, avec un catalogue cible comprenant les cinq niveaux du primaire (CP, CE1, CE2, CM1, CM2) et les niveaux 6e, 5e, 4e, 3e et 2nde. Le MVP prend comme premier corpus l'archive Mathenpoche 6e ; les contenus des cinq niveaux du primaire seront intégrés au projet par étapes. Une activité peut toutefois être proposée dès le pilote à plusieurs classes en choisissant un profil de difficulté adapté : le niveau de provenance d'un exercice ne détermine pas à lui seul le niveau de compétence requis. Les exercices seront progressivement réécrits en technologies web actuelles afin de fonctionner sans Adobe Flash. Le service vise en priorité les collégiens et professeurs de mathématiques du Congo et des pays africains francophones, ainsi que les élèves et enseignants du primaire.
 
-Le projet doit rester utile avec des téléphones modestes, des connexions lentes ou instables et des sessions courtes en classe. La création d’un compte ne doit jamais être obligatoire pour accéder aux exercices. Les professeurs pourront créer et gérer leurs comptes ainsi que ceux des élèves qui en ont besoin. Les tableaux de bord permettront aux professeurs de suivre leurs classes et aux élèves connectés de consulter leurs propres progrès.
+Le projet doit rester utile avec des téléphones modestes, des connexions lentes ou instables et des sessions courtes en classe. La création d’un compte ne doit jamais être obligatoire pour accéder aux exercices. Les professeurs pourront créer et gérer leurs comptes ainsi que ceux des élèves qui en ont besoin. Les tableaux de bord permettront aux professeurs de suivre leurs classes et aux élèves connectés de consulter leurs propres progrès. L'accès restera gratuit pour les élèves et les enseignants ; le financement de la maintenance et des évolutions reposera sur le sponsoring et le naming.
 
 ## 2. Situation de départ observée
 
@@ -96,11 +96,20 @@ Ces constats sont issus d’une première inspection des dossiers locaux. La pha
 - Mesurer le poids des pages et la fluidité sur un téléphone d’entrée de gamme avant de définir les budgets finaux.
 - Étudier une capacité d’installation ou d’usage hors connexion après le premier pilote ; ne pas la promettre avant validation technique.
 
+### Financement et visibilité des partenaires
+
+- Le service est gratuit d'accès pour les élèves et les enseignants. Le projet prévoit de financer la maintenance et le développement par le sponsoring et le naming.
+- Les logos des institutions et entreprises partenaires peuvent apparaître dans l'interface sous la mention de soutien du projet et avec une animation discrète.
+- Les logos et animations ne doivent jamais recouvrir une question, une réponse, un score ou une commande pédagogique. Respecter la préférence de réduction des animations et éviter les clignotements ou mouvements rapides.
+- La présence d'un partenaire ne doit pas modifier les exercices ni rendre les parcours pédagogiques payants.
+
 ## 7. Architecture proposée
 
 ### Application web
 
-- Next.js avec TypeScript et App Router, dans un dépôt GitHub dédié au fork.
+- Next.js avec TypeScript et App Router, dans un dépôt GitHub dédié au fork. Le starter retenu est [React Three Next de pmndrs](https://github.com/pmndrs/react-three-next), qui associe Next.js, React Three Fiber et Three.js.
+- Utiliser le rendu DOM/React pour la navigation, les consignes, les formulaires, les tableaux et les tableaux de bord. Réserver le Canvas Three.js aux visualisations mathématiques ou animations pédagogiques qui en tirent un bénéfice réel, afin de préserver le chargement sur les téléphones modestes et les connexions lentes.
+- Vérifier le poids initial, l'accessibilité, la compatibilité Vercel et les usages réellement nécessaires du starter pendant le prototype ; charger les scènes 3D uniquement là où elles sont utilisées.
 - Pages, catalogue et métadonnées pré-rendables autant que possible. Les composants interactifs des exercices s’exécutent côté navigateur.
 - Moteur partagé pour le cadre commun : consigne, aides, validation, retour, progression locale et instrumentation.
 - Exercices organisés par familles pédagogiques et interactives. Chaque famille peut avoir son propre composant ou moteur ; ne pas forcer une abstraction générique avant d’avoir porté plusieurs exercices représentatifs.
@@ -119,6 +128,7 @@ Ces constats sont issus d’une première inspection des dossiers locaux. La pha
 ### Déploiement et performance
 
 - Vercel héberge l’application Next.js et ses fonctions serveur éventuelles.
+- URL publique cible du MVP : **[https://rallye-maths.ceredis.net](https://rallye-maths.ceredis.net)**. Le porteur du projet indique avoir créé l'enregistrement DNS dans Cloudflare ; le rattachement et la vérification du domaine côté Vercel restent à effectuer.
 - Coolify héberge Supabase sur un serveur contrôlé par le projet. Ne pas exposer PostgreSQL directement à Internet si une connexion applicative sécurisée peut être utilisée.
 - Choisir la région d’exécution des fonctions en tenant compte de la localisation réelle de la base. Les fichiers statiques profitent du CDN ; les requêtes de données dynamiques traversent le réseau jusqu’à la base.
 - Tester la latence depuis plusieurs pays d’Afrique francophone et sur réseaux mobiles. La présence d’un point de présence CDN proche ne rend pas automatiquement proches les fonctions et la base de données.
@@ -181,7 +191,7 @@ Un lecteur Ruffle peut servir à comparer ou consulter temporairement les ancien
 
 - Porter d'abord l'exercice 2 de Numérique, chapitre 1, série 1, niveau 6e, choisi par le porteur du projet. Sa fiche fonctionnelle et ses points à valider sont dans [`PILOTE-6E-CHAP1-SERIE1-EXO2.md`](PILOTE-6E-CHAP1-SERIE1-EXO2.md).
 - Créer le squelette Next.js, le catalogue, le gabarit d’exercice et un premier portage HTML5, comprenant les deux modes et les profils de difficulté configurables prévus pour le pilote.
-- Mesurer poids, affichage mobile, usage clavier/tactile et comportement sur connexion lente.
+- Mesurer poids, affichage mobile, usage clavier/tactile, animations du starter et comportement sur connexion lente.
 - Ne pas activer le suivi individuel réel à ce stade ; définir toutefois le contrat de données des tentatives et les besoins des deux tableaux de bord pour éviter une migration coûteuse.
 
 **Sortie attendue :** prototype déployable en prévisualisation, validé par comparaison avec l’original.
@@ -193,6 +203,8 @@ Un lecteur Ruffle peut servir à comparer ou consulter temporairement les ancien
 - Porter une petite sélection d’exercices par familles identifiées ; afficher clairement l’état de couverture.
 - Ajouter recherche simple, liens directs, progression locale facultative et documentation de contribution. Les exercices restent entièrement utilisables sans compte.
 - Mettre en place pipeline de déploiement GitHub vers prévisualisation Vercel puis production.
+- Préparer le domaine public `rallye-maths.ceredis.net` et vérifier le routage Cloudflare–Vercel avant l'ouverture du MVP.
+- Inclure la présentation discrète des partenaires dans l'interface, sans gêner les exercices.
 
 **Sortie attendue :** application gratuite d’accès, utilisable sans compte, avec un premier ensemble d’exercices relus.
 
@@ -262,7 +274,7 @@ Un lecteur Ruffle peut servir à comparer ou consulter temporairement les ancien
 2. Valider avec les enseignants les profils de difficulté pour les activités concernées et les règles d'adaptation.
 3. Décider si les comptes et tableaux de bord sont inclus dans le MVP public ou livrés dans une version pilote distincte ; leur objectif est de conserver les résultats authentifiés et de montrer le positionnement de l'élève.
 4. Préciser si le mode hors connexion est une exigence de lancement ou une étape ultérieure.
-5. Définir le pays et le serveur Coolify envisagés, le domaine, le budget et la personne responsable des mises à jour et sauvegardes.
+5. Définir le pays et le serveur Coolify envisagés, le budget et la personne responsable des mises à jour et sauvegardes ; rattacher et vérifier le domaine `rallye-maths.ceredis.net` auprès de Vercel.
 6. Définir les champs minimaux des comptes élèves, le mode de création/remise des identifiants, les règles de récupération et la procédure de consentement/autorisation adaptée aux établissements et pays pilotes.
 7. Vérifier les règles de confidentialité et les durées de conservation des données de progrès avant le pilote.
 8. Vérifier la licence exacte de chaque corpus et composant réutilisé, ainsi que les obligations de redistribution du fork.
