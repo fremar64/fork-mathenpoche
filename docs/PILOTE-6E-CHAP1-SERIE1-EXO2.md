@@ -48,6 +48,7 @@ stateDiagram-v2
 - Réponse correcte au premier ou au second essai : afficher **« Bravo ! »** et attribuer l'unique point de la question. Une question ne peut rapporter qu'un point.
 - Première réponse incorrecte : afficher **« Faux ! Encore un essai ! Utilise l'aide ! »**. La question reste ouverte pour un second essai et la réponse ne peut pas être validée en double pendant l'affichage du retour.
 - Deuxième réponse incorrecte consécutive sur la même question : afficher **« Non ! Regarde bien l'aide ! »**, ne pas attribuer le point de cette question et ouvrir la séquence d'aide. Après l'aide, montrer la correction et le bouton **« Suite »** ; l'élève passe alors à la question suivante.
+- En mode Évaluation, après deux erreurs sur une question, ne pas attribuer son point, afficher **« Réponse incorrecte. Passe à la question suivante. »** et le bouton **« Suite »**. Le clic sur **Suite** ouvre la question suivante ; si la question terminée était la dixième, il ouvre l'écran final avec le score et l'appréciation.
 - En mode Entraînement, l'élève peut aussi ouvrir l'aide avant de se tromper. Cette commande n'est pas proposée en mode Évaluation.
 - Après dix questions, afficher le score final sur 10.
 
@@ -124,9 +125,11 @@ Les plages doivent être définies en fonction du nombre de chiffres et du rang 
 - **Plafond :** CP, CE1, CE2, CM1, CM2 ou 6e.
 - **Qui peut le modifier :** élève, ou professeur qui verrouille le réglage pour une activité attribuée.
 - **Entraînement :** pas de chronomètre ; aide interactive et tableau de numération disponibles.
-- **Évaluation :** exercice chronométré ; aide et tableau de numération désactivés. Les règles de score par question restent les mêmes.
+- **Évaluation :** exercice chronométré avec compte à rebours ; aide et tableau de numération désactivés. Les règles de score par question restent les mêmes.
 
-La durée ou le mode d'affichage du chronomètre, ainsi que le texte de retour après une erreur en Évaluation (où l'aide est indisponible), seront définis avant l'implémentation de ce mode. Une évaluation effectuée avec un compte enregistre notamment le mode, le score, le taux de réussite et la durée, pour le positionnement et le suivi dans les tableaux de bord.
+Pour cet exercice, la durée maximale dépend du profil de difficulté : **15 minutes** pour CP, CE1 et CE2 ; **10 minutes** pour CM1, CM2 et 6e. Le compte à rebours est visible pendant l'évaluation. Ces durées sont des valeurs initiales et pourront être ajustées pendant les essais du MVP avec des élèves. Le comportement à l'expiration du délai (arrêt immédiat et traitement des questions non répondues) sera précisé pendant cette phase de test. Une évaluation effectuée avec un compte enregistre notamment le mode, le profil, le score, le taux de réussite et la durée effective, pour le positionnement et le suivi dans les tableaux de bord.
+
+En mode Évaluation, le texte présenté après une première réponse incorrecte et le maintien du second essai restent à finaliser ; aucun retour ne doit suggérer d'utiliser l'aide, car elle est désactivée. Après deux erreurs, le texte et le bouton **Suite** sont ceux définis ci-dessus.
 
 Les valeurs du menu peuvent évoluer après relecture pédagogique ; elles ne doivent pas être codées en dur dans la logique de génération.
 
@@ -141,14 +144,15 @@ Les valeurs du menu peuvent évoluer après relecture pédagogique ; elles ne do
 7. L'aide peut être parcourue dans les deux sens et fermée sans perdre l'état de la question.
 8. Le mode adaptatif part d'une petite plage, progresse selon la politique validée et respecte toujours le plafond.
 9. Les réglages restent modifiables par l'élève lorsqu'aucune consigne de professeur ne les verrouille.
-10. En Évaluation, le chronomètre fonctionne et ni l'aide ni le tableau de numération ne sont accessibles ; le résultat final comprend le taux et l'appréciation.
-11. Les actions principales sont accessibles au clavier et sur téléphone ; l'activité demeure jouable avec une connexion coupée après son chargement.
+10. En Évaluation, le compte à rebours est de 15 minutes pour CP–CE2 et de 10 minutes pour CM1–6e ; ni l'aide ni le tableau de numération ne sont accessibles.
+11. En Évaluation, deux erreurs affichent le message convenu et **Suite** ; à la dernière question, **Suite** ouvre l'écran final avec score et appréciation.
+12. Les actions principales sont accessibles au clavier et sur téléphone ; l'activité demeure jouable avec une connexion coupée après son chargement.
 
 ## 9. Points à trancher avant l'implémentation
 
 - Valider avec les enseignants les profils CP–6e et la politique précise de montée/descente adaptative.
 - Déterminer si une question réussie affiche **Suite** ou passe directement à la suivante ; les captures historiques documentent explicitement **Suite** après la correction d'un échec.
-- Définir avant le mode Évaluation la durée ou le fonctionnement du chronomètre et le retour affiché à la première erreur sans aide disponible.
+- Définir le retour après la première erreur en Évaluation et le traitement des questions non répondues à l'expiration du chronomètre ; ajuster les durées avec les élèves pendant les essais du MVP.
 - Définir la granularité des indicateurs de positionnement dans les tableaux de bord, sans confondre résultat sur cette activité et niveau général en mathématiques.
 - Décompiler/inspecter le SWF ou les FLA pour confirmer le nombre de questions, le choix des rangs, les règles de score et le contenu complet de l'aide.
 
