@@ -1,11 +1,11 @@
 # Cahier des charges — fork HTML5 de Mathenpoche
 
 **Version :** 0.1 — 26 novembre 2026  
-**Statut :** document de cadrage initial, à préciser avec les enseignants et les élèves pilotes.
+**Statut :** cadrage produit mis à jour selon les orientations du porteur du projet ; les détails d'implémentation et les validations professorales restent à préciser.
 
 ## 1. Vision
 
-Créer un fork libre, gratuit d’accès et utilisable sur le web des exercices Mathenpoche des niveaux 6e, 5e, 4e, 3e et 2nde. Les exercices seront progressivement réécrits en technologies web actuelles afin de fonctionner sans Adobe Flash. Le service vise en priorité les collégiens et professeurs de mathématiques du Congo et des pays africains francophones.
+Créer un fork libre, gratuit d’accès et utilisable sur le web des exercices Mathenpoche, avec un catalogue cible comprenant les cinq niveaux du primaire (CP, CE1, CE2, CM1, CM2) et les niveaux 6e, 5e, 4e, 3e et 2nde. Le MVP prend comme premier corpus l'archive Mathenpoche 6e ; les contenus des cinq niveaux du primaire seront intégrés au projet par étapes. Une activité peut toutefois être proposée dès le pilote à plusieurs classes en choisissant un profil de difficulté adapté : le niveau de provenance d'un exercice ne détermine pas à lui seul le niveau de compétence requis. Les exercices seront progressivement réécrits en technologies web actuelles afin de fonctionner sans Adobe Flash. Le service vise en priorité les collégiens et professeurs de mathématiques du Congo et des pays africains francophones, ainsi que les élèves et enseignants du primaire.
 
 Le projet doit rester utile avec des téléphones modestes, des connexions lentes ou instables et des sessions courtes en classe. La création d’un compte ne doit jamais être obligatoire pour accéder aux exercices. Les professeurs pourront créer et gérer leurs comptes ainsi que ceux des élèves qui en ont besoin. Les tableaux de bord permettront aux professeurs de suivre leurs classes et aux élèves connectés de consulter leurs propres progrès.
 
@@ -20,10 +20,10 @@ Ces constats sont issus d’une première inspection des dossiers locaux. La pha
 
 ## 3. Objectifs
 
-1. Regrouper dans une seule application les contenus des cinq niveaux, avec navigation par niveau, chapitre, série et exercice.
+1. Regrouper dans une seule application les contenus des cinq niveaux du primaire et des cinq niveaux 6e–2nde, avec navigation par classe, chapitre, série et exercice ; le premier corpus MVP est l'archive 6e.
 2. Remplacer progressivement les exercices Flash par des exercices HTML5 accessibles depuis les navigateurs actuels.
 3. Préserver autant que possible les objectifs pédagogiques, les consignes, les aides, la correction et les variantes des exercices d’origine.
-4. Proposer une expérience rapide sur mobile, adaptée aux débits limités et sans compte obligatoire pour s’entraîner.
+4. Proposer une expérience rapide sur mobile, adaptée aux débits limités et sans compte obligatoire pour s’entraîner. Pour les activités compatibles, séparer le choix de l'activité mathématique du profil de difficulté (notamment l'ordre de grandeur des nombres).
 5. Permettre aux professeurs de créer leur compte, de créer et gérer des comptes élèves, de proposer des exercices ou parcours et de suivre les progrès de leurs élèves dans un tableau de bord.
 6. Permettre à chaque élève connecté de consulter son propre tableau de bord, son historique et ses progrès.
 7. Publier le code source sur GitHub et déployer l’application web sur Vercel. Héberger les services Supabase sur l’infrastructure Coolify prévue par le porteur du projet.
@@ -71,7 +71,7 @@ Ces constats sont issus d’une première inspection des dossiers locaux. La pha
 
 ### Navigation
 
-- Accueil présentant les niveaux 6e à 2nde.
+- Accueil présentant les niveaux du primaire et du collège/lycée à mesure que leurs contenus sont intégrés ; le MVP démarre avec le corpus 6e.
 - Pages de niveau, chapitre, série et exercice avec des URL stables et partageables.
 - Recherche simple par titre, notion et code historique lorsqu’il est disponible.
 - Indication visible des exercices portés en HTML5 et des contenus encore indisponibles.
@@ -79,6 +79,9 @@ Ces constats sont issus d’une première inspection des dossiers locaux. La pha
 ### Écran d’exercice
 
 - Titre, niveau, chapitre, série, consigne et objectif pédagogique.
+- Deux modes distincts : **Entraînement** (aide et outils pédagogiques disponibles, sans chronomètre) et **Évaluation** (chronométré, sans aide ni outils d'aide comme le tableau de numération).
+- Pour les activités où le niveau de difficulté est paramétrable, choix explicite d'un profil de difficulté, indépendant du niveau du catalogue et du niveau de l'archive source ; le professeur peut verrouiller ce réglage pour un travail attribué.
+- Pour un exercice à un point par question, une réponse correcte au premier ou au deuxième essai rapporte le point ; deux erreurs consécutives laissent à zéro la question concernée sans retirer de point déjà gagné. À la fin, afficher le taux de réussite et l'appréciation pédagogique prévue pour l'exercice.
 - Zone d’interaction adaptée à la famille d’exercice.
 - Aide et correction accessibles à la demande.
 - Retour compréhensible après une réponse, possibilité de réessayer et indication du score si pertinent.
@@ -130,6 +133,7 @@ Les exercices eux-mêmes restent dans le dépôt. La base ne conserve que les do
 - `class_members` : rattachement d’un compte élève à une classe, état du compte et pseudonyme éventuel.
 - `assignments` : exercices ou séries attribués par un professeur à une classe ou à un élève, échéance éventuelle et état d’avancement.
 - `attempts` : compte élève, exercice, résultat utile, nombre d’essais si nécessaire et horodatage ; conserver une durée seulement si elle sert à un objectif pédagogique explicite.
+- Chaque résultat suivi doit identifier le mode (Entraînement ou Évaluation), le score obtenu et le maximum, le taux de réussite, le profil de difficulté choisi et, pour une Évaluation chronométrée, la durée. Ces données alimentent le positionnement sur l'activité ou la notion travaillée ; ne pas les présenter comme un diagnostic général des capacités de l'élève.
 - `teacher_paths` : parcours personnalisés référençant les identifiants d’exercices du catalogue versionné.
 - Vues ou requêtes de synthèse pour le tableau de bord professeur (par classe et par élève) et le tableau de bord élève (ses propres résultats uniquement).
 
@@ -176,7 +180,7 @@ Un lecteur Ruffle peut servir à comparer ou consulter temporairement les ancien
 ### Phase 1 — prototype pédagogique
 
 - Porter d'abord l'exercice 2 de Numérique, chapitre 1, série 1, niveau 6e, choisi par le porteur du projet. Sa fiche fonctionnelle et ses points à valider sont dans [`PILOTE-6E-CHAP1-SERIE1-EXO2.md`](PILOTE-6E-CHAP1-SERIE1-EXO2.md).
-- Créer le squelette Next.js, le catalogue, le gabarit d’exercice et un premier portage HTML5.
+- Créer le squelette Next.js, le catalogue, le gabarit d’exercice et un premier portage HTML5, comprenant les deux modes et les profils de difficulté configurables prévus pour le pilote.
 - Mesurer poids, affichage mobile, usage clavier/tactile et comportement sur connexion lente.
 - Ne pas activer le suivi individuel réel à ce stade ; définir toutefois le contrat de données des tentatives et les besoins des deux tableaux de bord pour éviter une migration coûteuse.
 
@@ -184,7 +188,8 @@ Un lecteur Ruffle peut servir à comparer ou consulter temporairement les ancien
 
 ### Phase 2 — MVP public
 
-- Intégrer la navigation complète des niveaux 6e à 2nde.
+- Publier le premier corpus issu de l'archive Mathenpoche 6e et sa navigation complète ; préparer le catalogue à accueillir les niveaux du primaire et 5e à 2nde par étapes.
+- Rendre disponibles, dans les activités compatibles, les profils de difficulté CP, CE1, CE2, CM1, CM2 et 6e, indépendamment du niveau de provenance du contenu.
 - Porter une petite sélection d’exercices par familles identifiées ; afficher clairement l’état de couverture.
 - Ajouter recherche simple, liens directs, progression locale facultative et documentation de contribution. Les exercices restent entièrement utilisables sans compte.
 - Mettre en place pipeline de déploiement GitHub vers prévisualisation Vercel puis production.
@@ -205,6 +210,7 @@ Un lecteur Ruffle peut servir à comparer ou consulter temporairement les ancien
 ### Phase 4 — extension et pérennité
 
 - Prioriser les portages selon l’usage pédagogique, la demande des professeurs, les dépendances et le coût de migration.
+- Intégrer par étapes les archives et contenus des cinq niveaux du primaire, puis étendre la couverture 5e à 2nde ; conserver la séparation entre classe de provenance, activité mathématique et profil de difficulté.
 - Accueillir des contributions via fiches d’exercice, conventions, revue de code et revue pédagogique.
 - Suivre erreurs, performance mobile, disponibilité, coût d’hébergement et couverture du catalogue.
 
@@ -214,7 +220,10 @@ Un lecteur Ruffle peut servir à comparer ou consulter temporairement les ancien
 
 ### Version publique sans compte
 
-- Les cinq niveaux 6e, 5e, 4e, 3e et 2nde sont accessibles depuis une application et ont une structure de navigation cohérente.
+- Le corpus MVP issu de l'archive 6e est accessible depuis une application ; la navigation peut s'étendre aux cinq niveaux du primaire et aux niveaux 5e à 2nde sans refonte du catalogue.
+- Les profils de difficulté sont proposés séparément de la classe de provenance de l'activité lorsqu'ils s'appliquent.
+- Les modes Entraînement et Évaluation respectent leurs règles d'outils, d'aide et de chronométrage.
+- Chaque exercice affiche à la fin son score et, lorsque le barème le prévoit, l'appréciation du taux de réussite.
 - Les exercices portés sont identifiés sans ambiguïté ; les exercices non portés ne donnent pas l’impression d’être disponibles.
 - Chaque exercice publié possède une fiche de comportement, une attribution/licence vérifiée et une validation pédagogique.
 - Les interactions principales fonctionnent au clavier et sur écran tactile.
@@ -229,6 +238,7 @@ Un lecteur Ruffle peut servir à comparer ou consulter temporairement les ancien
 - Les comptes professeur peuvent créer et gérer les comptes élèves de leurs classes par une procédure sécurisée.
 - Le tableau de bord professeur montre les classes qui lui appartiennent, les travaux attribués et les progrès de ses élèves.
 - Le tableau de bord élève ne révèle que ses propres données ; ses progrès sont conservés après déconnexion et reconnexion.
+- Les résultats permettent de situer l'élève sur les activités ou notions réalisées et de suivre son évolution ; les modes, scores, taux et durées d'évaluation utiles sont distingués.
 - Les autorisations ont été vérifiées avec des comptes de test couvrant plusieurs professeurs, plusieurs classes et plusieurs élèves.
 - Une procédure de sauvegarde et une restauration de Supabase ont été démontrées avant le suivi réel d’élèves.
 
@@ -248,9 +258,9 @@ Un lecteur Ruffle peut servir à comparer ou consulter temporairement les ancien
 
 ## 13. Décisions à prendre avant l’implémentation des comptes et tableaux de bord
 
-1. Confirmer que la première version couvre uniquement la 6e à la 2nde et exclut CAP.
-2. Choisir avec un professeur l’exercice pilote et les critères pédagogiques prioritaires.
-3. Décider si les comptes et tableaux de bord sont inclus dans le MVP public ou livrés dans une version pilote distincte ; ils restent une capacité cible du projet.
+1. Détailler le calendrier d'intégration des cinq niveaux du primaire et des niveaux 5e à 2nde après le MVP issu de l'archive 6e.
+2. Valider avec les enseignants les profils de difficulté pour les activités concernées et les règles d'adaptation.
+3. Décider si les comptes et tableaux de bord sont inclus dans le MVP public ou livrés dans une version pilote distincte ; leur objectif est de conserver les résultats authentifiés et de montrer le positionnement de l'élève.
 4. Préciser si le mode hors connexion est une exigence de lancement ou une étape ultérieure.
 5. Définir le pays et le serveur Coolify envisagés, le domaine, le budget et la personne responsable des mises à jour et sauvegardes.
 6. Définir les champs minimaux des comptes élèves, le mode de création/remise des identifiants, les règles de récupération et la procédure de consentement/autorisation adaptée aux établissements et pays pilotes.
