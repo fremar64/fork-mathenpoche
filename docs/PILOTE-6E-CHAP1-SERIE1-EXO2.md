@@ -2,11 +2,13 @@
 
 **Pilote :** 6e — Numérique — chapitre 1 — série 1 — exercice 2  
 **Intitulé historique :** « Quel est le chiffre des ... ? »  
-**Statut :** spécification initiale, issue des indications de l'enseignant et des captures fournies ; le portage HTML5 n'a pas encore commencé.
+**Statut :** spécification mise à jour selon les orientations pédagogiques du porteur du projet ; le portage HTML5 n'a pas encore commencé.
 
 ## 1. Délimitation du pilote
 
 L'URL fournie, `pages/numerique/chap1/serie1/index.html`, est la page d'une série comportant plusieurs exercices. Les captures montrent le bouton **Exercice n° 2**. Le premier portage porte donc sur l'exercice 2, situé dans `pages/numerique/chap1/serie1/exo2/`, pas sur les sept exercices de la série.
+
+Le contenu source du MVP pilote vient de l'archive Mathenpoche 6e. Le niveau d'archive indique la provenance et le classement du contenu, pas le niveau de difficulté imposé à l'élève. Cette activité de numération doit pouvoir être réglée pour des élèves du CP à la 6e ; le menu de difficulté choisit l'ordre de grandeur des nombres indépendamment du niveau de catalogue.
 
 Fichiers repérés dans les archives locales :
 
@@ -42,17 +44,28 @@ stateDiagram-v2
 
 ### Réponses et retours
 
-- Réponse correcte : afficher **« Bravo ! »**, ajouter un point et passer à la suite du parcours.
+- Réponse correcte au premier ou au second essai : afficher **« Bravo ! »** et attribuer l'unique point de la question. Une question ne peut rapporter qu'un point.
 - Première réponse incorrecte : afficher **« Faux ! Encore un essai ! Utilise l'aide ! »**. La question reste ouverte pour un second essai et la réponse ne peut pas être validée en double pendant l'affichage du retour.
-- Deuxième réponse incorrecte : afficher **« Non ! Regarde bien l'aide ! »**, retirer un point au score courant selon la règle demandée, puis ouvrir la séquence d'aide. Après l'aide, montrer la correction et le bouton **« Suite »** ; l'élève passe alors à la question suivante.
+- Deuxième réponse incorrecte consécutive sur la même question : afficher **« Non ! Regarde bien l'aide ! »**, ne pas attribuer le point de cette question et ouvrir la séquence d'aide. Après l'aide, montrer la correction et le bouton **« Suite »** ; l'élève passe alors à la question suivante.
 - L'élève peut aussi ouvrir l'aide avant de se tromper.
 - Après dix questions, afficher le score final sur 10.
 
-Les captures montrent un compteur intermédiaire sous la forme « score sur questions terminées » (par exemple `5 sur 7`) et une correction à consulter avant **Suite**. La version HTML5 conservera ce repère pendant l'activité, puis affichera le total sur 10 à la fin.
+Les captures montrent un compteur intermédiaire sous la forme « points obtenus sur questions terminées » (par exemple `5 sur 7`). Ainsi, après six réussites puis deux erreurs à la septième question, le score est `6 sur 7` : le point de la septième question n'est pas gagné et aucun point déjà obtenu n'est retiré. Une réussite au second essai rapporte le point de la question. Le score est donc toujours compris entre zéro et le nombre de questions terminées ; il n'existe pas de pénalité soustraite au cumul antérieur.
 
-### Score à confirmer avant l'implémentation
+### Principe de mesure de la maîtrise
 
-La règle « retirer un point au score courant après deux erreurs » est reprise littéralement. La valeur minimale du score n'est pas précisée ; proposition prudente : ne jamais descendre sous zéro. Il faudra aussi figer le comportement si l'élève réussit au deuxième essai : proposition actuelle, accorder le point de la question, sans pénalité.
+Une première erreur isolée peut être une inattention ; elle ne suffit pas à conclure à une non-maîtrise. Deux erreurs consécutives sur une question indiquent un doute suffisamment fort pour ne pas attribuer le point correspondant. Le taux de réussite donne un indicateur de maîtrise de l'activité évaluée. Il ne doit pas être présenté comme une mesure universelle du niveau en mathématiques.
+
+À la fin de l'exercice, afficher le taux de réussite et l'appréciation correspondante :
+
+| Résultat sur 10 | Appréciation |
+| ---: | --- |
+| 0 à 4 (moins de 50 %) | Performance très insuffisante |
+| 5 à 7 (de 50 % à moins de 80 %) | Performance insuffisante |
+| 8 à 9 (de 80 % à moins de 100 %) | Performance satisfaisante |
+| 10 (100 %) | Performance très satisfaisante |
+
+Pour une affectation authentifiée, enregistrer le résultat et l'activité concernée afin que le tableau de bord puisse montrer le positionnement de l'élève sur cette activité et suivre son évolution. L'accès sans compte reste possible ; il n'enregistre pas de résultat nominatif dans Supabase.
 
 ## 4. Saisie et tableau de numération
 
@@ -77,7 +90,7 @@ Le portage peut remplacer l'animation Flash par une suite de diapositives HTML/S
 
 ## 6. Difficulté adaptative et réglages
 
-L'ordre de grandeur commence petit et augmente quand l'élève réussit sans difficulté. L'élève peut choisir un profil au démarrage. Le professeur peut choisir un plafond de difficulté pour un travail assigné et décider si l'élève peut le modifier.
+L'activité mathématique (« identifier le chiffre occupant un rang donné ») est indépendante de la classe de l'archive qui la contient. Un menu absent de l'application historique permet de choisir un profil de difficulté initial, élève ou professeur selon le contexte. Le profil détermine l'ordre de grandeur des nombres, tandis que le contenu et l'objectif de l'activité restent les mêmes. En mode adaptatif, l'ordre de grandeur commence petit puis augmente progressivement lorsque l'élève réussit sans difficulté. Le professeur peut fixer un plafond et décider si l'élève peut le modifier.
 
 | Profil proposé | Maximum inclusif fourni pour cadrer le profil |
 | --- | ---: |
@@ -86,9 +99,9 @@ L'ordre de grandeur commence petit et augmente quand l'élève réussit sans dif
 | CE2 | 1 000 000 |
 | CM1 | 1 000 000 000 |
 | CM2 | 999 999 999 999 |
-| 6e | jusqu'à 999 999 999 999 dans le tableau à 12 chiffres ; plafond à confirmer avec l'exercice historique et un professeur |
+| 6e | jusqu'à 999 999 999 999, capacité du tableau de numération à douze chiffres |
 
-Ces bornes sont celles communiquées pour ce projet. Elles doivent être relues pédagogiquement avant d'être présentées comme un référentiel officiel.
+Ces bornes sont des profils de difficulté proposés pour l'activité, et non une affirmation que l'exercice appartient exclusivement à ces classes ni un référentiel officiel exhaustif. Le MVP utilise le contenu de l'archive Mathenpoche 6e ; le projet prévoit ensuite l'intégration des contenus des cinq niveaux du primaire. Un élève du primaire peut déjà utiliser le pilote avec le profil adapté, sans attendre que l'archive de sa classe soit intégrée au catalogue.
 
 ### Politique adaptative proposée
 
@@ -103,12 +116,16 @@ La politique suivante est une proposition à valider avant le code :
 
 Les plages doivent être définies en fonction du nombre de chiffres et du rang interrogé, avec un mélange de rangs accessible au profil. Le générateur doit éviter les questions ambiguës et contrôler les zéros, les rangs disponibles, les bornes inclusives et les répétitions excessives.
 
-## 7. Réglages à proposer
+## 7. Modes et réglages à proposer
 
-- **Mode :** adaptatif (par défaut) ou difficulté fixe.
+- **Mode pédagogique :** Entraînement ou Évaluation.
+- **Mode de difficulté :** adaptatif (par défaut en Entraînement) ou difficulté fixe.
 - **Plafond :** CP, CE1, CE2, CM1, CM2 ou 6e.
 - **Qui peut le modifier :** élève, ou professeur qui verrouille le réglage pour une activité attribuée.
-- **Aide :** disponible à la demande dans tous les modes.
+- **Entraînement :** pas de chronomètre ; aide interactive et tableau de numération disponibles.
+- **Évaluation :** exercice chronométré ; aide et tableau de numération désactivés. Les règles de score par question restent les mêmes.
+
+La durée ou le mode d'affichage du chronomètre, ainsi que le texte de retour après une erreur en Évaluation (où l'aide est indisponible), seront définis avant l'implémentation de ce mode. Une évaluation effectuée avec un compte enregistre notamment le mode, le score, le taux de réussite et la durée, pour le positionnement et le suivi dans les tableaux de bord.
 
 Les valeurs du menu peuvent évoluer après relecture pédagogique ; elles ne doivent pas être codées en dur dans la logique de génération.
 
@@ -116,20 +133,21 @@ Les valeurs du menu peuvent évoluer après relecture pédagogique ; elles ne do
 
 1. La page de série ouvre clairement l'exercice 2 ; l'exercice est identifié comme un pilote HTML5.
 2. Une session produit dix questions et ne dépasse pas le plafond numérique choisi.
-3. Une réponse correcte au premier ou au second essai affiche le retour convenu et met à jour le score selon la règle validée.
-4. Une première erreur laisse une seconde tentative ; une seconde erreur lance l'aide et conduit à la correction puis à **Suite**.
+3. Une réponse correcte au premier ou au second essai affiche le retour convenu et attribue un point, sans dépasser un point par question.
+4. Une première erreur laisse une seconde tentative ; une seconde erreur laisse la question à zéro point et, en Entraînement, lance l'aide puis conduit à la correction et à **Suite**.
 5. La validation fonctionne avec le bouton et avec **Entrée** ; la même réponse ne peut pas être soumise deux fois par un double clic.
 6. Le tableau de numération affiche les douze colonnes en quatre classes, accepte la saisie d'un chiffre par case et peut être effacé.
 7. L'aide peut être parcourue dans les deux sens et fermée sans perdre l'état de la question.
 8. Le mode adaptatif part d'une petite plage, progresse selon la politique validée et respecte toujours le plafond.
 9. Les réglages restent modifiables par l'élève lorsqu'aucune consigne de professeur ne les verrouille.
-10. Les actions principales sont accessibles au clavier et sur téléphone ; l'activité demeure jouable avec une connexion coupée après son chargement.
+10. En Évaluation, le chronomètre fonctionne et ni l'aide ni le tableau de numération ne sont accessibles ; le résultat final comprend le taux et l'appréciation.
+11. Les actions principales sont accessibles au clavier et sur téléphone ; l'activité demeure jouable avec une connexion coupée après son chargement.
 
 ## 9. Points à trancher avant l'implémentation
 
-- Confirmer le plancher de score après une seconde erreur et le point attribué en cas de réussite au second essai.
-- Confirmer le plafond numérique de 6e à partir de l'exercice historique.
-- Valider les profils CP–6e et la politique de montée/descente adaptative avec un professeur.
+- Valider avec les enseignants les profils CP–6e et la politique précise de montée/descente adaptative.
 - Déterminer si une question réussie affiche **Suite** ou passe directement à la suivante ; les captures historiques documentent explicitement **Suite** après la correction d'un échec.
+- Définir avant le mode Évaluation la durée ou le fonctionnement du chronomètre et le retour affiché à la première erreur sans aide disponible.
+- Définir la granularité des indicateurs de positionnement dans les tableaux de bord, sans confondre résultat sur cette activité et niveau général en mathématiques.
 - Décompiler/inspecter le SWF ou les FLA pour confirmer le nombre de questions, le choix des rangs, les règles de score et le contenu complet de l'aide.
 
