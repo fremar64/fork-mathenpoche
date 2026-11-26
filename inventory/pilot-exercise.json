@@ -1,0 +1,61 @@
+Failed to create stream fd: Operation not permitted
+Failed to create stream fd: Operation not permitted
+Failed to create stream fd: Operation not permitted
+{
+  "id": "6e-numerique-chap1-serie1-exo2",
+  "status": "specification-draft",
+  "title": "Quel est le chiffre des ... ?",
+  "level": "6e",
+  "subject_area": "numérique",
+  "chapter": 1,
+  "series": 1,
+  "exercise_number": 2,
+  "source_series_index": "6eme/pages/numerique/chap1/serie1/index.html",
+  "source_exercise_page": "6eme/pages/numerique/chap1/serie1/exo2/exo2.htm",
+  "legacy_assets": [
+    "6eme/pages/numerique/chap1/serie1/exo2/N1s1ex2.swf",
+    "6eme/pages/numerique/chap1/serie1/exo2/N1s1ex2_an.swf",
+    "6eme/pages/numerique/chap1/serie1/exo2/tab_entiers.swf",
+    "6eme/6N1s1ex2.fla",
+    "6eme/6N1s1ex2_an.fla"
+  ],
+  "learning_objective": "Identifier le chiffre occupant un rang donné dans l'écriture d'un entier naturel.",
+  "question_count": 10,
+  "answer_type": "single-digit",
+  "score": {
+    "maximum": 10,
+    "correct_answer_delta": 1,
+    "second_error_delta": -1,
+    "minimum_score": null,
+    "minimum_score_decision": "needs-validation",
+    "success_on_second_attempt": "needs-validation"
+  },
+  "feedback": {
+    "correct": "Bravo !",
+    "first_incorrect": "Faux ! Encore un essai ! Utilise l'aide !",
+    "second_incorrect": "Non ! Regarde bien l'aide !"
+  },
+  "difficulty_profiles": [
+    {"name": "CP", "max_inclusive": 100},
+    {"name": "CE1", "max_inclusive": 1000},
+    {"name": "CE2", "max_inclusive": 1000000},
+    {"name": "CM1", "max_inclusive": 1000000000},
+    {"name": "CM2", "max_inclusive": 999999999999},
+    {
+      "name": "6e",
+      "max_inclusive": 999999999999,
+      "status": "provisional; confirm against the historical exercise and teacher review"
+    }
+  ],
+  "adaptive_policy": {
+    "status": "proposal-needs-teacher-validation",
+    "default_enabled": true,
+    "starting_max_inclusive": 99,
+    "increase_after_consecutive_first_try_successes": 2,
+    "hold_after_second_try_success": true,
+    "decrease_after_consecutive_help_completions": 2,
+    "teacher_can_set_ceiling": true,
+    "teacher_can_lock_ceiling": true
+  },
+  "source_license": "GPL stated on the official Mathenpoche archive page; exact version and notices still require confirmation"
+}
