@@ -1,0 +1,14 @@
+Failed to create stream fd: Operation not permitted
+Failed to create stream fd: Operation not permitted
+Failed to create stream fd: Operation not permitted
+level,archive_type,archive,archive_bytes,member_count,total_uncompressed_bytes,count_fla,count_bak,count_css,count_gif,count_gz,count_htm,count_html,count_jpg,count_swf,count_sxw,count_txt,count_xml,count_as,count_js
+6e,Sources,6eme.zip,92525604,769,444105216,769,,,,,,,,,,,,,
+6e,SWF,6eme.zip,43882641,1677,46562981,,1,1,13,1,371,318,11,886,1,73,1,,
+5e,Sources,5eme.zip,98652889,842,539788800,842,,,,,,,,,,,,,
+5e,SWF,5eme.zip,46759819,1659,48392218,,,,2,,391,303,10,882,,70,1,,
+4e,Sources,4eme.zip,136190906,1067,811478673,1066,,,,,,,,,,,1,,
+4e,SWF,4eme.zip,68417782,2109,70345523,,,,2,,522,347,10,1124,,82,22,,
+3e,Sources,3eme.zip,111826512,767,630260744,766,,,,,,,,,,,,1,
+3e,SWF,3eme.zip,54112863,1644,55717632,,,,2,,384,326,10,848,,70,2,2,
+2nde,Sources,2nde.zip,14543088,87,69030400,87,,,,,,,,,,,,,
+2nde,SWF,2nde.zip,26741712,790,29734447,1,,5,12,,180,144,10,385,,30,18,2,3
