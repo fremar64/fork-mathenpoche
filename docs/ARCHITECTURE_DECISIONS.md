@@ -12,9 +12,13 @@
 | ADR-008 | Utiliser Ruffle comme outil de consultation comparative de l'installation historique pendant le portage, pas comme implémentation finale des exercices migrés. | Le but du fork est de remplacer progressivement les SWF par des interactions HTML5. | Adoptée |
 | ADR-009 | Le premier portage fonctionnel ciblé est le n° 2 de Numérique, chapitre 1, série 1 en 6e. | L'enseignant l'a choisi comme exercice pilote et a fourni ses règles pédagogiques ainsi que des captures d'écran. Le périmètre est l'exercice 2, pas toute la série. | Adoptée |
 | ADR-010 | Séparer l'activité mathématique, sa classe de provenance dans le catalogue et le profil de difficulté proposé à l'élève. | Le MVP part de l'archive 6e, mais une activité comme la valeur de position des chiffres peut convenir à des élèves du CP à la 6e avec des ordres de grandeur différents. Le projet cible aussi les cinq niveaux du primaire. | Adoptée |
-| ADR-011 | Prévoir pour chaque exercice les modes Entraînement et Évaluation. | Entraînement est sans chronomètre et conserve l'aide ainsi que les outils pédagogiques ; Évaluation est chronométrée et désactive l'aide et le tableau de numération. Le détail de la durée et des retours propres à l'évaluation reste à spécifier. | Adoptée |
+| ADR-011 | Prévoir pour chaque exercice les modes Entraînement et Évaluation. | Entraînement est sans chronomètre et conserve l'aide ainsi que les outils pédagogiques ; Évaluation est chronométrée et désactive l'aide et le tableau de numération. Pour le pilote, les limites initiales sont 15 minutes en CP–CE2 et 10 minutes en CM1–6e, ajustables lors des essais du MVP. | Adoptée |
 | ADR-012 | Mesurer le résultat question par question sans retirer de points déjà acquis. | Une bonne réponse au premier ou au second essai donne un point. Deux erreurs consécutives laissent la question à zéro. Le taux obtenu et l'appréciation finale décrivent la maîtrise de l'activité travaillée. | Adoptée |
 | ADR-013 | Enregistrer les résultats des élèves connectés afin d'alimenter le positionnement dans les tableaux de bord. | Conserver les informations utiles sur l'activité, le mode, le score et le taux ; inclure la durée pour les évaluations chronométrées. L'usage anonyme des exercices demeure possible. | Adoptée |
+| ADR-014 | En Évaluation, après deux erreurs sur une question, ne pas attribuer le point et afficher le message « Réponse incorrecte. Passe à la question suivante. » avec le bouton « Suite ». | Si la question est la dixième, « Suite » ouvre l'écran final avec le score et l'appréciation. L'aide et le tableau de numération restent désactivés. | Adoptée |
+| ADR-015 | Utiliser `https://rallye-maths.ceredis.net` comme URL publique cible du MVP. | Le porteur du projet a créé l'enregistrement DNS avec Cloudflare ; le rattachement et la validation du domaine auprès de Vercel restent à réaliser. | Adoptée |
+| ADR-016 | Prendre [React Three Next de pmndrs](https://github.com/pmndrs/react-three-next) comme starter de l'application. | Ce starter associe Next.js, React Three Fiber et Three.js. Garder les interactions ordinaires en DOM/React et réserver Three.js aux visualisations pédagogiques utiles ; mesurer le coût mobile et réseau au prototype. Le dépôt du starter annonce une licence MIT, à conserver dans les avis de dépendances réutilisées. | Adoptée |
+| ADR-017 | Maintenir l'accès gratuit des élèves et enseignants et financer le projet par sponsoring et naming. | L'interface pourra afficher les logos des partenaires avec une animation discrète qui ne gêne pas les activités et respecte la réduction des animations. | Adoptée |
 
 ## Décisions restant à prendre
 
@@ -24,5 +28,6 @@
 - Familles d'exercices et bibliothèques graphiques après portage de quelques exemples.
 - Calendrier de livraison des comptes et tableaux de bord par rapport au MVP public.
 - Calendrier d'intégration des cinq archives du primaire et des niveaux 5e à 2nde après le MVP issu de l'archive 6e.
-- Emplacement Coolify, domaine, budget, sauvegarde externe et responsable de l'exploitation.
+- Emplacement Coolify, budget, sauvegarde externe et responsable de l'exploitation ; rattachement et vérification de `rallye-maths.ceredis.net` chez Vercel.
+- Politique de visibilité des sponsors et partenaires, emplacements des logos et règles de naming à convenir avec les partenaires.
 - Données minimales de suivi, conservation et règles de gestion des comptes élèves pour les pays pilotes.
