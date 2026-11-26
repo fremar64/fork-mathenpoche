@@ -1,6 +1,3 @@
-Failed to create stream fd: Operation not permitted
-Failed to create stream fd: Operation not permitted
-Failed to create stream fd: Operation not permitted
 # Fiche fonctionnelle du pilote
 
 **Pilote :** 6e — Numérique — chapitre 1 — série 1 — exercice 2  
