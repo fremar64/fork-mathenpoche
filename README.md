@@ -1,6 +1,3 @@
-Failed to create stream fd: Operation not permitted
-Failed to create stream fd: Operation not permitted
-Failed to create stream fd: Operation not permitted
 # Mathenpoche HTML5
 
 Fork en préparation pour porter progressivement les exercices Mathenpoche vers une application Next.js/TypeScript, sans rendre les exercices dépendants d'un compte.
