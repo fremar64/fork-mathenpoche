@@ -46,7 +46,7 @@ stateDiagram-v2
 ### Réponses et retours
 
 - Réponse correcte au premier ou au second essai : afficher **« Bravo ! »** et attribuer l'unique point de la question. Une question ne peut rapporter qu'un point.
-- Première réponse incorrecte : afficher **« Faux ! Encore un essai ! Utilise l'aide ! »**. La question reste ouverte pour un second essai et la réponse ne peut pas être validée en double pendant l'affichage du retour.
+- En mode Entraînement, une première réponse incorrecte affiche **« Faux ! Encore un essai ! Utilise l'aide ! »**. En mode Évaluation, elle affiche **« Réponse incorrecte. Essaie encore. »**. Dans les deux cas, la question reste ouverte pour un second essai et une réponse ne peut pas être validée en double pendant l'affichage du retour.
 - Deuxième réponse incorrecte consécutive sur la même question : afficher **« Non ! Regarde bien l'aide ! »**, ne pas attribuer le point de cette question et ouvrir la séquence d'aide. Après l'aide, montrer la correction et le bouton **« Suite »** ; l'élève passe alors à la question suivante.
 - En mode Évaluation, après deux erreurs sur une question, ne pas attribuer son point, afficher **« Réponse incorrecte. Passe à la question suivante. »** et le bouton **« Suite »**. Le clic sur **Suite** ouvre la question suivante ; si la question terminée était la dixième, il ouvre l'écran final avec le score et l'appréciation.
 - En mode Entraînement, l'élève peut aussi ouvrir l'aide avant de se tromper. Cette commande n'est pas proposée en mode Évaluation.
@@ -67,7 +67,13 @@ Une première erreur isolée peut être une inattention ; elle ne suffit pas à 
 | 8 à 9 (de 80 % à moins de 100 %) | Performance satisfaisante |
 | 10 (100 %) | Performance très satisfaisante |
 
-Pour une affectation authentifiée, enregistrer le résultat et l'activité concernée afin que le tableau de bord puisse montrer le positionnement de l'élève sur cette activité et suivre son évolution. L'accès sans compte reste possible ; il n'enregistre pas de résultat nominatif dans Supabase.
+### Validation du niveau de compétence
+
+Un niveau de compétence correspond à la réussite de cette activité pour un profil de difficulté défini : CP, CE1, CE2, CM1, CM2 ou 6e. Le niveau est validé lorsque l'élève termine l'exercice avec au moins **80 %** de réussite. Pour le pilote de dix questions, cela représente au moins 8/10 ; le même seuil s'applique aux autres exercices, par exemple 4/5.
+
+Une évaluation interrompue par l'expiration du chronomètre n'est pas une tentative complète et ne valide pas le niveau de compétence, même si le score partiel atteint 80 %. Les questions non répondues rapportent zéro point. L'écran final présente le résultat partiel et l'appréciation calculée, tandis que le tableau de bord garde le profil concerné comme **non validé**. L'élève doit s'entraîner, puis refaire l'exercice pour valider ce niveau. Une tentative complète sous le seuil de 80 % ne valide pas non plus le niveau.
+
+Pour un élève connecté, enregistrer le résultat, le mode, le profil de difficulté et le statut de validation afin que le tableau de bord montre les niveaux atteints par activité et suive leur évolution. L'accès sans compte reste possible ; il n'enregistre pas de résultat nominatif dans Supabase.
 
 ## 4. Saisie et tableau de numération
 
@@ -103,7 +109,7 @@ L'activité mathématique (« identifier le chiffre occupant un rang donné ») 
 | CM2 | 999 999 999 999 |
 | 6e | jusqu'à 999 999 999 999, capacité du tableau de numération à douze chiffres |
 
-Ces bornes sont des profils de difficulté proposés pour l'activité, et non une affirmation que l'exercice appartient exclusivement à ces classes ni un référentiel officiel exhaustif. Le MVP utilise le contenu de l'archive Mathenpoche 6e ; le projet prévoit ensuite l'intégration des contenus des cinq niveaux du primaire. Un élève du primaire peut déjà utiliser le pilote avec le profil adapté, sans attendre que l'archive de sa classe soit intégrée au catalogue.
+Les profils de difficulté correspondent aux niveaux d'études CP, CE1, CE2, CM1, CM2 et 6e. Les bornes numériques ci-dessus sont celles proposées pour cette activité. Le MVP utilise le contenu de l'archive Mathenpoche 6e ; le projet prévoit ensuite l'intégration des contenus des cinq niveaux du primaire. Un élève du primaire peut déjà utiliser le pilote avec le profil correspondant, sans attendre que l'archive de sa classe soit intégrée au catalogue.
 
 ### Politique adaptative proposée
 
@@ -127,9 +133,9 @@ Les plages doivent être définies en fonction du nombre de chiffres et du rang 
 - **Entraînement :** pas de chronomètre ; aide interactive et tableau de numération disponibles.
 - **Évaluation :** exercice chronométré avec compte à rebours ; aide et tableau de numération désactivés. Les règles de score par question restent les mêmes.
 
-Pour cet exercice, la durée maximale dépend du profil de difficulté : **15 minutes** pour CP, CE1 et CE2 ; **10 minutes** pour CM1, CM2 et 6e. Le compte à rebours est visible pendant l'évaluation. Ces durées sont des valeurs initiales et pourront être ajustées pendant les essais du MVP avec des élèves. Le comportement à l'expiration du délai (arrêt immédiat et traitement des questions non répondues) sera précisé pendant cette phase de test. Une évaluation effectuée avec un compte enregistre notamment le mode, le profil, le score, le taux de réussite et la durée effective, pour le positionnement et le suivi dans les tableaux de bord.
+Pour cet exercice, la durée maximale dépend du profil de difficulté : **15 minutes** pour CP, CE1 et CE2 ; **10 minutes** pour CM1, CM2 et 6e. Le compte à rebours est visible pendant l'évaluation. Ces durées sont des valeurs initiales et pourront être ajustées pendant les essais du MVP avec des élèves. À l'expiration, l'évaluation se termine ; les questions non répondues rapportent zéro point et le niveau de compétence reste non validé. Une évaluation effectuée avec un compte enregistre notamment le mode, le profil, le score, le taux de réussite, le statut de validation et la durée effective, pour le positionnement et le suivi dans les tableaux de bord.
 
-En mode Évaluation, le texte présenté après une première réponse incorrecte et le maintien du second essai restent à finaliser ; aucun retour ne doit suggérer d'utiliser l'aide, car elle est désactivée. Après deux erreurs, le texte et le bouton **Suite** sont ceux définis ci-dessus.
+En mode Évaluation, le premier retour est **« Réponse incorrecte. Essaie encore. »** ; aucun retour ne suggère d'utiliser l'aide, car elle est désactivée.
 
 Les valeurs du menu peuvent évoluer après relecture pédagogique ; elles ne doivent pas être codées en dur dans la logique de génération.
 
@@ -145,14 +151,16 @@ Les valeurs du menu peuvent évoluer après relecture pédagogique ; elles ne do
 8. Le mode adaptatif part d'une petite plage, progresse selon la politique validée et respecte toujours le plafond.
 9. Les réglages restent modifiables par l'élève lorsqu'aucune consigne de professeur ne les verrouille.
 10. En Évaluation, le compte à rebours est de 15 minutes pour CP–CE2 et de 10 minutes pour CM1–6e ; ni l'aide ni le tableau de numération ne sont accessibles.
-11. En Évaluation, deux erreurs affichent le message convenu et **Suite** ; à la dernière question, **Suite** ouvre l'écran final avec score et appréciation.
-12. Les actions principales sont accessibles au clavier et sur téléphone ; l'activité demeure jouable avec une connexion coupée après son chargement.
+11. En Évaluation, la première erreur affiche **« Réponse incorrecte. Essaie encore. »** ; deux erreurs affichent le second message convenu et **Suite**.
+12. À expiration, les questions non répondues valent zéro et le profil de compétence reste non validé. Une tentative complète est nécessaire pour valider le profil avec au moins 80 % de réussite.
+13. À la dernière question, **Suite** ouvre l'écran final avec score et appréciation.
+14. Les actions principales sont accessibles au clavier et sur téléphone ; l'activité demeure jouable avec une connexion coupée après son chargement.
 
 ## 9. Points à trancher avant l'implémentation
 
 - Valider avec les enseignants les profils CP–6e et la politique précise de montée/descente adaptative.
 - Déterminer si une question réussie affiche **Suite** ou passe directement à la suivante ; les captures historiques documentent explicitement **Suite** après la correction d'un échec.
-- Définir le retour après la première erreur en Évaluation et le traitement des questions non répondues à l'expiration du chronomètre ; ajuster les durées avec les élèves pendant les essais du MVP.
-- Définir la granularité des indicateurs de positionnement dans les tableaux de bord, sans confondre résultat sur cette activité et niveau général en mathématiques.
+- Ajuster les durées de 15 et 10 minutes avec les élèves pendant les essais du MVP.
+- Définir l'affichage et l'historique du statut de compétence dans les tableaux de bord, sans confondre résultat sur cette activité et niveau général en mathématiques.
 - Décompiler/inspecter le SWF ou les FLA pour confirmer le nombre de questions, le choix des rangs, les règles de score et le contenu complet de l'aide.
 
