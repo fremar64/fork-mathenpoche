@@ -1,6 +1,3 @@
-Failed to create stream fd: Operation not permitted
-Failed to create stream fd: Operation not permitted
-Failed to create stream fd: Operation not permitted
 # Cahier des charges — fork HTML5 de Mathenpoche
 
 **Version :** 0.1 — 26 novembre 2026  
