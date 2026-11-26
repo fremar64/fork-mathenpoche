@@ -4,7 +4,7 @@ Fork en préparation pour porter progressivement les exercices Mathenpoche vers 
 
 ## État
 
-Le dépôt est au cadrage initial (Phase 0). Il ne contient pas encore l'application Next.js ni les exercices portés.
+La Phase 0 est terminée et le pilote est spécifié. Le dépôt ne contient pas encore l'application Next.js ni les exercices portés.
 
 Voir :
 
