@@ -1,6 +1,3 @@
-Failed to create stream fd: Operation not permitted
-Failed to create stream fd: Operation not permitted
-Failed to create stream fd: Operation not permitted
 level,exercise_directory,swf_count,html_count,js_count,xml_count,member_count,matched_source_fla_stems
 2nde,2nde/pages/geometrie/chap1/serie1/exo2,2,1,0,0,3,
 2nde,2nde/pages/geometrie/chap1/serie1/exo3,2,1,0,1,4,
