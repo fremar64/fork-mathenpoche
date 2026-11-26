@@ -30,6 +30,7 @@ Une session comporte dix questions. Chaque question affiche un entier et demande
 
 ```mermaid
 stateDiagram-v2
+    %% Parcours du mode Entraînement ; le mode Évaluation masque l'aide et le tableau.
     [*] --> Question
     Question --> ReponseCorrecte: réponse exacte
     Question --> SecondeTentative: première erreur
@@ -47,7 +48,7 @@ stateDiagram-v2
 - Réponse correcte au premier ou au second essai : afficher **« Bravo ! »** et attribuer l'unique point de la question. Une question ne peut rapporter qu'un point.
 - Première réponse incorrecte : afficher **« Faux ! Encore un essai ! Utilise l'aide ! »**. La question reste ouverte pour un second essai et la réponse ne peut pas être validée en double pendant l'affichage du retour.
 - Deuxième réponse incorrecte consécutive sur la même question : afficher **« Non ! Regarde bien l'aide ! »**, ne pas attribuer le point de cette question et ouvrir la séquence d'aide. Après l'aide, montrer la correction et le bouton **« Suite »** ; l'élève passe alors à la question suivante.
-- L'élève peut aussi ouvrir l'aide avant de se tromper.
+- En mode Entraînement, l'élève peut aussi ouvrir l'aide avant de se tromper. Cette commande n'est pas proposée en mode Évaluation.
 - Après dix questions, afficher le score final sur 10.
 
 Les captures montrent un compteur intermédiaire sous la forme « points obtenus sur questions terminées » (par exemple `5 sur 7`). Ainsi, après six réussites puis deux erreurs à la septième question, le score est `6 sur 7` : le point de la septième question n'est pas gagné et aucun point déjà obtenu n'est retiré. Une réussite au second essai rapporte le point de la question. Le score est donc toujours compris entre zéro et le nombre de questions terminées ; il n'existe pas de pénalité soustraite au cumul antérieur.
