@@ -2,6 +2,8 @@
 
 Fork en préparation pour porter progressivement les exercices Mathenpoche vers une application Next.js/TypeScript, sans rendre les exercices dépendants d'un compte.
 
+**URL publique cible du MVP :** [https://rallye-maths.ceredis.net](https://rallye-maths.ceredis.net)
+
 ## État
 
 La Phase 0 est terminée et le pilote est spécifié. Le dépôt ne contient pas encore l'application Next.js ni les exercices portés.
