@@ -1,6 +1,3 @@
-Failed to create stream fd: Operation not permitted
-Failed to create stream fd: Operation not permitted
-Failed to create stream fd: Operation not permitted
 level,archive_type,archive,archive_bytes,member_count,total_uncompressed_bytes,count_fla,count_bak,count_css,count_gif,count_gz,count_htm,count_html,count_jpg,count_swf,count_sxw,count_txt,count_xml,count_as,count_js
 6e,Sources,6eme.zip,92525604,769,444105216,769,,,,,,,,,,,,,
 6e,SWF,6eme.zip,43882641,1677,46562981,,1,1,13,1,371,318,11,886,1,73,1,,
