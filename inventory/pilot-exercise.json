@@ -1,6 +1,6 @@
 {
   "id": "6e-numerique-chap1-serie1-exo2",
-  "status": "specification-draft",
+  "status": "specification-updated",
   "title": "Quel est le chiffre des ... ?",
   "level": "6e",
   "subject_area": "numérique",
@@ -17,20 +17,45 @@
     "6eme/6N1s1ex2_an.fla"
   ],
   "learning_objective": "Identifier le chiffre occupant un rang donné dans l'écriture d'un entier naturel.",
+  "catalog_source_level": "6e",
+  "difficulty_is_independent_of_catalog_level": true,
+  "intended_difficulty_profiles": ["CP", "CE1", "CE2", "CM1", "CM2", "6e"],
   "question_count": 10,
   "answer_type": "single-digit",
   "score": {
     "maximum": 10,
-    "correct_answer_delta": 1,
-    "second_error_delta": -1,
-    "minimum_score": null,
-    "minimum_score_decision": "needs-validation",
-    "success_on_second_attempt": "needs-validation"
+    "point_per_question": 1,
+    "correct_on_first_or_second_attempt": 1,
+    "two_consecutive_errors_on_question": 0,
+    "deduct_from_previously_earned_points": false,
+    "interim_denominator": "completed_questions",
+    "final_denominator": 10,
+    "appraisal": [
+      {"min_score": 0, "max_score": 4, "label": "Performance très insuffisante"},
+      {"min_score": 5, "max_score": 7, "label": "Performance insuffisante"},
+      {"min_score": 8, "max_score": 9, "label": "Performance satisfaisante"},
+      {"min_score": 10, "max_score": 10, "label": "Performance très satisfaisante"}
+    ]
   },
   "feedback": {
     "correct": "Bravo !",
     "first_incorrect": "Faux ! Encore un essai ! Utilise l'aide !",
     "second_incorrect": "Non ! Regarde bien l'aide !"
+  },
+  "modes": {
+    "training": {
+      "label": "Entraînement",
+      "timed": false,
+      "help_enabled": true,
+      "place_value_table_enabled": true
+    },
+    "evaluation": {
+      "label": "Évaluation",
+      "timed": true,
+      "help_enabled": false,
+      "place_value_table_enabled": false,
+      "feedback_after_first_error": "needs-specification"
+    }
   },
   "difficulty_profiles": [
     {"name": "CP", "max_inclusive": 100},
@@ -53,6 +78,19 @@
     "decrease_after_consecutive_help_completions": 2,
     "teacher_can_set_ceiling": true,
     "teacher_can_lock_ceiling": true
+  },
+  "account_progress": {
+    "persist_authenticated_results": true,
+    "dashboard_positioning_scope": "mastery of this activity and related notion, tracked over time",
+    "positioning_is_not_a_general_math_ability_diagnosis": true,
+    "anonymous_use_requires_account": false,
+    "record_evaluation_duration": true
+  },
+  "project_content_scope": {
+    "mvp_source_corpus": "Mathenpoche 6e archive",
+    "future_primary_levels": ["CP", "CE1", "CE2", "CM1", "CM2"],
+    "future_secondary_levels": ["5e", "4e", "3e", "2nde"],
+    "primary_profiles_can_use_compatible_6e_pilot_before_primary_archives_are_integrated": true
   },
   "source_license": "GPL stated on the official Mathenpoche archive page; exact version and notices still require confirmation"
 }
