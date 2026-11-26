@@ -20,6 +20,7 @@
   "catalog_source_level": "6e",
   "difficulty_is_independent_of_catalog_level": true,
   "intended_difficulty_profiles": ["CP", "CE1", "CE2", "CM1", "CM2", "6e"],
+  "difficulty_profile_labels_are_study_levels": true,
   "question_count": 10,
   "answer_type": "single-digit",
   "score": {
@@ -30,6 +31,12 @@
     "deduct_from_previously_earned_points": false,
     "interim_denominator": "completed_questions",
     "final_denominator": 10,
+    "competency_threshold_percent": 80,
+    "competency_validation_requires_completed_attempt": true,
+    "competency_validation_by": ["exercise", "difficulty_profile"],
+    "incomplete_timeout_attempt_validates_competency": false,
+    "unanswered_questions_after_timeout_points": 0,
+    "after_incomplete_attempt": "student trains and retakes the exercise to validate the difficulty profile",
     "appraisal": [
       {"min_score": 0, "max_score": 4, "label": "Performance très insuffisante"},
       {"min_score": 5, "max_score": 7, "label": "Performance insuffisante"},
@@ -39,7 +46,8 @@
   },
   "feedback": {
     "correct": "Bravo !",
-    "first_incorrect": "Faux ! Encore un essai ! Utilise l'aide !",
+    "first_incorrect_training": "Faux ! Encore un essai ! Utilise l'aide !",
+    "first_incorrect_evaluation": "Réponse incorrecte. Essaie encore.",
     "second_incorrect_training": "Non ! Regarde bien l'aide !",
     "second_incorrect_evaluation": "Réponse incorrecte. Passe à la question suivante."
   },
@@ -65,10 +73,10 @@
       "time_limit_status": "initial-values-adjustable-during-MVP-tests-with-students",
       "help_enabled": false,
       "place_value_table_enabled": false,
-      "feedback_after_first_error": "needs-specification; must not suggest using unavailable help",
+      "feedback_after_first_error": "Réponse incorrecte. Essaie encore.",
       "feedback_after_second_error": "Réponse incorrecte. Passe à la question suivante.",
       "after_second_error_action": "show Suite button; clicking continues to next question or opens final result with score and appraisal after question 10",
-      "timeout_behavior": "needs-MVP-test-specification"
+      "timeout_behavior": "end assessment; unanswered questions earn zero points; difficulty-profile competency remains not validated even if partial score reaches 80%; student must train and retake"
     }
   },
   "difficulty_profiles": [
@@ -95,10 +103,11 @@
   },
   "account_progress": {
     "persist_authenticated_results": true,
-    "dashboard_positioning_scope": "mastery of this activity and related notion, tracked over time",
+    "dashboard_positioning_scope": "competency validation by exercise and study-level difficulty profile; complete attempt requires at least 80% success",
     "positioning_is_not_a_general_math_ability_diagnosis": true,
     "anonymous_use_requires_account": false,
-    "record_evaluation_duration": true
+    "record_evaluation_duration": true,
+    "record_competency_validation_status": true
   },
   "project_content_scope": {
     "mvp_source_corpus": "Mathenpoche 6e archive",
