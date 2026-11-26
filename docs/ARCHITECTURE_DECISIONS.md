@@ -11,13 +11,18 @@
 | ADR-007 | Reporter le choix final de licence du nouveau dépôt jusqu'à la vérification des avis de licence dans les archives et de la version GPL applicable. | La page d'archives annonce GPL sans préciser sur la page la version. Les textes et ressources réutilisés doivent être vérifiés avant publication. | À confirmer |
 | ADR-008 | Utiliser Ruffle comme outil de consultation comparative de l'installation historique pendant le portage, pas comme implémentation finale des exercices migrés. | Le but du fork est de remplacer progressivement les SWF par des interactions HTML5. | Adoptée |
 | ADR-009 | Le premier portage fonctionnel ciblé est le n° 2 de Numérique, chapitre 1, série 1 en 6e. | L'enseignant l'a choisi comme exercice pilote et a fourni ses règles pédagogiques ainsi que des captures d'écran. Le périmètre est l'exercice 2, pas toute la série. | Adoptée |
+| ADR-010 | Séparer l'activité mathématique, sa classe de provenance dans le catalogue et le profil de difficulté proposé à l'élève. | Le MVP part de l'archive 6e, mais une activité comme la valeur de position des chiffres peut convenir à des élèves du CP à la 6e avec des ordres de grandeur différents. Le projet cible aussi les cinq niveaux du primaire. | Adoptée |
+| ADR-011 | Prévoir pour chaque exercice les modes Entraînement et Évaluation. | Entraînement est sans chronomètre et conserve l'aide ainsi que les outils pédagogiques ; Évaluation est chronométrée et désactive l'aide et le tableau de numération. Le détail de la durée et des retours propres à l'évaluation reste à spécifier. | Adoptée |
+| ADR-012 | Mesurer le résultat question par question sans retirer de points déjà acquis. | Une bonne réponse au premier ou au second essai donne un point. Deux erreurs consécutives laissent la question à zéro. Le taux obtenu et l'appréciation finale décrivent la maîtrise de l'activité travaillée. | Adoptée |
+| ADR-013 | Enregistrer les résultats des élèves connectés afin d'alimenter le positionnement dans les tableaux de bord. | Conserver les informations utiles sur l'activité, le mode, le score et le taux ; inclure la durée pour les évaluations chronométrées. L'usage anonyme des exercices demeure possible. | Adoptée |
 
 ## Décisions restant à prendre
 
-- Le dépôt public GitHub `fremar64/fork-mathenpoche` est créé et prêt à recevoir la branche locale `main`.
+- Le dépôt public GitHub `fremar64/fork-mathenpoche` est créé et la branche locale `main` suit `origin/main`.
 - Version exacte de la licence GPL et avis propres aux ressources/logiciels embarqués.
 - Répartition du catalogue entre JSON/TypeScript/Markdown après étude des métadonnées historiques.
 - Familles d'exercices et bibliothèques graphiques après portage de quelques exemples.
 - Calendrier de livraison des comptes et tableaux de bord par rapport au MVP public.
+- Calendrier d'intégration des cinq archives du primaire et des niveaux 5e à 2nde après le MVP issu de l'archive 6e.
 - Emplacement Coolify, domaine, budget, sauvegarde externe et responsable de l'exploitation.
 - Données minimales de suivi, conservation et règles de gestion des comptes élèves pour les pays pilotes.
