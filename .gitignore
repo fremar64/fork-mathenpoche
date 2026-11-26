@@ -1,0 +1,14 @@
+Failed to create stream fd: Operation not permitted
+Failed to create stream fd: Operation not permitted
+Failed to create stream fd: Operation not permitted
+.next/
+node_modules/
+out/
+coverage/
+.env
+.env.*
+!.env.example
+.vercel/
+*.log
+*.tsbuildinfo
+.DS_Store
