@@ -1,6 +1,3 @@
-Failed to create stream fd: Operation not permitted
-Failed to create stream fd: Operation not permitted
-Failed to create stream fd: Operation not permitted
 level,archive,source_member,reference,resolved_member,resolution
 2nde,2nde.zip,2nde/pages/numerique/chap8/serie1/exo1/exo1.htm,"http://download.macromedia.com/pub/shockwave/cabs/flash/swflash.cab#version=4,0,2,0",,external_or_non_file
 2nde,2nde.zip,2nde/pages/numerique/chap8/serie1/exo2/exo2.htm,"http://download.macromedia.com/pub/shockwave/cabs/flash/swflash.cab#version=4,0,2,0",,external_or_non_file
