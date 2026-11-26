@@ -82,6 +82,7 @@ Ces constats sont issus d’une première inspection des dossiers locaux. La pha
 - Deux modes distincts : **Entraînement** (aide et outils pédagogiques disponibles, sans chronomètre) et **Évaluation** (chronométré, sans aide ni outils d'aide comme le tableau de numération).
 - Pour les activités où le niveau de difficulté est paramétrable, choix explicite d'un profil de difficulté, indépendant du niveau du catalogue et du niveau de l'archive source ; le professeur peut verrouiller ce réglage pour un travail attribué.
 - Pour un exercice à un point par question, une réponse correcte au premier ou au deuxième essai rapporte le point ; deux erreurs consécutives laissent à zéro la question concernée sans retirer de point déjà gagné. À la fin, afficher le taux de réussite et l'appréciation pédagogique prévue pour l'exercice.
+- Un profil de difficulté correspond à un niveau d'études, ici CP, CE1, CE2, CM1, CM2 ou 6e. Pour une activité et un profil donnés, le niveau de compétence est validé par une tentative complète avec au moins 80 % de réussite (par exemple 8/10 ou 4/5). Une évaluation interrompue par le chronomètre ne valide pas le niveau, même si le score partiel atteint le seuil ; les questions non répondues valent zéro et l'élève doit s'entraîner puis refaire l'exercice.
 - Zone d’interaction adaptée à la famille d’exercice.
 - Aide et correction accessibles selon le mode choisi ; aucune aide ni aucun tableau d'aide en mode Évaluation.
 - Retour compréhensible après une réponse, possibilité de réessayer et indication du score si pertinent.
@@ -143,7 +144,8 @@ Les exercices eux-mêmes restent dans le dépôt. La base ne conserve que les do
 - `class_members` : rattachement d’un compte élève à une classe, état du compte et pseudonyme éventuel.
 - `assignments` : exercices ou séries attribués par un professeur à une classe ou à un élève, échéance éventuelle et état d’avancement.
 - `attempts` : compte élève, exercice, résultat utile, nombre d’essais si nécessaire et horodatage ; conserver une durée seulement si elle sert à un objectif pédagogique explicite.
-- Chaque résultat suivi doit identifier le mode (Entraînement ou Évaluation), le score obtenu et le maximum, le taux de réussite, le profil de difficulté choisi et, pour une Évaluation chronométrée, la durée. Ces données alimentent le positionnement sur l'activité ou la notion travaillée ; ne pas les présenter comme un diagnostic général des capacités de l'élève.
+- Chaque résultat suivi doit identifier le mode (Entraînement ou Évaluation), le score obtenu et le maximum, le taux de réussite, le profil de difficulté choisi, le caractère complet ou interrompu de la tentative et, pour une Évaluation chronométrée, la durée. Ces données alimentent le positionnement sur l'activité ou la notion travaillée ; ne pas les présenter comme un diagnostic général des capacités de l'élève.
+- `competency_progress` (vue ou projection dérivée des tentatives) : état de validation par élève, activité et niveau d'études choisi. Une tentative complète à au moins 80 % valide ce niveau ; une tentative incomplète à expiration ne le valide jamais. Une tentative suivante peut mettre à jour cet état après entraînement et nouvelle réalisation.
 - `teacher_paths` : parcours personnalisés référençant les identifiants d’exercices du catalogue versionné.
 - Vues ou requêtes de synthèse pour le tableau de bord professeur (par classe et par élève) et le tableau de bord élève (ses propres résultats uniquement).
 
@@ -213,7 +215,7 @@ Un lecteur Ruffle peut servir à comparer ou consulter temporairement les ancien
 - Déployer Supabase sur Coolify avec secrets, HTTPS, politiques RLS, sauvegardes externalisées et procédure de restauration éprouvée.
 - Ajouter l’authentification professeur, la création et gestion sécurisées des comptes élèves, les classes, les parcours attribués et l’enregistrement des tentatives.
 - Ajouter le tableau de bord professeur : classes, élèves, travaux attribués, avancement et progrès individuels, avec filtres par classe, élève, période et exercice lorsque pertinent.
-- Ajouter le tableau de bord élève : progrès par niveau/notion, historique de ses exercices et travaux attribués.
+- Ajouter le tableau de bord élève : progrès par activité et niveau de difficulté/études, niveaux de compétence validés ou restant à travailler, historique de ses exercices et travaux attribués.
 - Vérifier les permissions par rôle et par classe ; un professeur ne voit que ses classes, et un élève seulement ses propres résultats.
 - Garder les exercices publics et la progression locale accessibles sans compte.
 
@@ -251,6 +253,7 @@ Un lecteur Ruffle peut servir à comparer ou consulter temporairement les ancien
 - Le tableau de bord professeur montre les classes qui lui appartiennent, les travaux attribués et les progrès de ses élèves.
 - Le tableau de bord élève ne révèle que ses propres données ; ses progrès sont conservés après déconnexion et reconnexion.
 - Les résultats permettent de situer l'élève sur les activités ou notions réalisées et de suivre son évolution ; les modes, scores, taux et durées d'évaluation utiles sont distingués.
+- Le tableau de bord valide un niveau de compétence pour une activité et un profil d'études seulement après une tentative complète avec au moins 80 % de réussite ; une évaluation terminée par expiration reste non validée.
 - Les autorisations ont été vérifiées avec des comptes de test couvrant plusieurs professeurs, plusieurs classes et plusieurs élèves.
 - Une procédure de sauvegarde et une restauration de Supabase ont été démontrées avant le suivi réel d’élèves.
 
