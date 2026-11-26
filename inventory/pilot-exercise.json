@@ -20,18 +20,27 @@
   "notion_id": "nombres-entiers-naturels",
   "activity_family": "mathenpoche_decontextualized_exercise",
   "learning_path": {
-    "sequence": [
-      "contextualized_discovery_game",
-      "decontextualized_mathenpoche_exercises",
-      "contextualized_transfer_assessment_game"
-    ],
-    "this_activity_role": "practice",
-    "this_activity_position": 2,
-    "discovery_game_status": "to-design",
-    "transfer_assessment_game_status": "to-design",
-    "teacher_synthesis_between_discovery_and_practice": true,
-    "transfer_game_uses_new_context_and_same_mathematical_model": true,
-    "transfer_assessment_threshold": "to-be-defined-per-game"
+    "this_activity_role": "decontextualized-practice-and-number-range-extension",
+    "by_study_level": {
+      "CP": {
+        "sequence": [
+          "serious-game-for-initial-number-conceptualization-inspired-by-Brousseau",
+          "teacher-synthesis",
+          "Mathenpoche-practice"
+        ],
+        "discovery_game_reference": "Brousseau 2004, Part III, fundamental situation of enumeration",
+        "post_practice_contextual_game_status": "not-specified"
+      },
+      "CE1_to_6e": {
+        "sequence": [
+          "Mathenpoche-exercises-to-extend-mastered-number-range",
+          "contextualized-real-life-reinvestment-game"
+        ],
+        "game_example": "navigate a 3D neighborhood with keyboard arrows to reach a house given by its street number",
+        "game_model_differs_from_CP_TSD_game": true,
+        "assessment_method": "defer until prototype development and observation of student activity"
+      }
+    }
   },
   "catalog_source_level": "6e",
   "difficulty_is_independent_of_catalog_level": true,
@@ -119,12 +128,12 @@
   },
   "account_progress": {
     "persist_authenticated_results": true,
-    "dashboard_positioning_scope": "separate procedural exercise competency by study-level difficulty profile from contextualized transfer-game results",
+    "dashboard_positioning_scope": "separate procedural exercise competency by study-level difficulty profile from contextualized real-life reinvestment game observations",
     "positioning_is_not_a_general_math_ability_diagnosis": true,
     "anonymous_use_requires_account": false,
     "record_evaluation_duration": true,
     "record_competency_validation_status": true,
-    "record_transfer_evidence_separately": true
+    "record_contextual_reinvestment_evidence_separately": true
   },
   "project_content_scope": {
     "mvp_source_corpus": "Mathenpoche 6e archive",
