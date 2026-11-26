@@ -17,6 +17,22 @@
     "6eme/6N1s1ex2_an.fla"
   ],
   "learning_objective": "Identifier le chiffre occupant un rang donné dans l'écriture d'un entier naturel.",
+  "notion_id": "nombres-entiers-naturels",
+  "activity_family": "mathenpoche_decontextualized_exercise",
+  "learning_path": {
+    "sequence": [
+      "contextualized_discovery_game",
+      "decontextualized_mathenpoche_exercises",
+      "contextualized_transfer_assessment_game"
+    ],
+    "this_activity_role": "practice",
+    "this_activity_position": 2,
+    "discovery_game_status": "to-design",
+    "transfer_assessment_game_status": "to-design",
+    "teacher_synthesis_between_discovery_and_practice": true,
+    "transfer_game_uses_new_context_and_same_mathematical_model": true,
+    "transfer_assessment_threshold": "to-be-defined-per-game"
+  },
   "catalog_source_level": "6e",
   "difficulty_is_independent_of_catalog_level": true,
   "intended_difficulty_profiles": ["CP", "CE1", "CE2", "CM1", "CM2", "6e"],
@@ -103,11 +119,12 @@
   },
   "account_progress": {
     "persist_authenticated_results": true,
-    "dashboard_positioning_scope": "competency validation by exercise and study-level difficulty profile; complete attempt requires at least 80% success",
+    "dashboard_positioning_scope": "separate procedural exercise competency by study-level difficulty profile from contextualized transfer-game results",
     "positioning_is_not_a_general_math_ability_diagnosis": true,
     "anonymous_use_requires_account": false,
     "record_evaluation_duration": true,
-    "record_competency_validation_status": true
+    "record_competency_validation_status": true,
+    "record_transfer_evidence_separately": true
   },
   "project_content_scope": {
     "mvp_source_corpus": "Mathenpoche 6e archive",
