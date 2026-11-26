@@ -21,7 +21,7 @@
 | ADR-017 | Maintenir l'accès gratuit des élèves et enseignants et financer le projet par sponsoring et naming. | L'interface pourra afficher les logos des partenaires avec une animation discrète qui ne gêne pas les activités et respecte la réduction des animations. | Adoptée |
 | ADR-018 | Valider un niveau de compétence par activité et profil d'études à partir d'une réussite d'au moins 80 % sur une tentative complète. | Pour dix questions, le seuil est 8/10 ; pour cinq questions, il est 4/5. Une évaluation qui expire reste non validée, quelle que soit sa réussite partielle ; les questions non répondues rapportent zéro et l'élève doit s'entraîner puis refaire l'exercice. | Adoptée |
 | ADR-019 | Organiser le catalogue en deux familles : exercices Mathenpoche décontextualisés et jeux sérieux de résolution de problèmes contextualisés. | Les premières activités entraînent les savoir-faire mathématiques et les schèmes opératoires ; les jeux sérieux soutiennent la conceptualisation et le réinvestissement des connaissances. | Adoptée |
-| ADR-020 | Structurer les parcours par notion selon la séquence jeu de découverte, exercices d'entraînement Mathenpoche, jeu contextualisé de transfert/évaluation. | Le jeu final utilise un contexte nouveau mais le même modèle mathématique afin d'observer le transfert. Les résultats de savoir-faire et de transfert restent distincts ; la conception des jeux s'inspire de la TSD de Brousseau. | Adoptée |
+| ADR-020 | Adapter les parcours par notion au niveau d'études et à l'état de conceptualisation visé. | Au CP, un jeu inspiré de la situation fondamentale du dénombrement de Brousseau peut soutenir la conceptualisation initiale, avant une synthèse et des exercices Mathenpoche. Aux niveaux suivants, les exercices étendent le domaine des nombres maîtrisés, puis un jeu contextualisé de vie courante suit un modèle différent. Ses critères d'évaluation seront définis après observation des élèves. | Adoptée |
 
 ## Décisions restant à prendre
 
@@ -31,7 +31,7 @@
 - Familles d'exercices et bibliothèques graphiques après portage de quelques exemples.
 - Calendrier de livraison des comptes et tableaux de bord par rapport au MVP public.
 - Calendrier d'intégration des cinq archives du primaire et des niveaux 5e à 2nde après le MVP issu de l'archive 6e.
-- Scénarios des jeux de découverte et de transfert sur les nombres entiers naturels, ainsi que leurs critères de réussite et leur grille d'évaluation.
+- Conception du jeu TSD de conceptualisation initiale au CP ; modèle et modalités d'observation/évaluation du jeu immersif pour les niveaux avancés.
 - Emplacement Coolify, budget, sauvegarde externe et responsable de l'exploitation ; rattachement et vérification de `rallye-maths.ceredis.net` chez Vercel.
 - Politique de visibilité des sponsors et partenaires, emplacements des logos et règles de naming à convenir avec les partenaires.
 - Données minimales de suivi, conservation et règles de gestion des comptes élèves pour les pays pilotes.
