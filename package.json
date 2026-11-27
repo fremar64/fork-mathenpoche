@@ -1,0 +1,33 @@
+{
+  "name": "fork-mathenpoche",
+  "version": "0.1.0",
+  "private": true,
+  "engines": {
+    "node": ">=20.9.0"
+  },
+  "scripts": {
+    "dev": "next dev --webpack",
+    "build": "next build --webpack",
+    "start": "next start",
+    "lint": "eslint ."
+  },
+  "dependencies": {
+    "@react-three/drei": "^10.7.7",
+    "@react-three/fiber": "^9.6.1",
+    "next": "16.4.6",
+    "react": "^19.2.7",
+    "react-dom": "^19.2.7",
+    "three": "^0.160.0",
+    "zustand": "^4.5.2"
+  },
+  "devDependencies": {
+    "@types/node": "^20.11.0",
+    "@types/react": "^19.2.17",
+    "@types/react-dom": "^19.2.3",
+    "@types/three": "^0.160.0",
+    "@eslint/eslintrc": "^3.3.1",
+    "eslint": "^9.39.0",
+    "eslint-config-next": "16.4.6",
+    "typescript": "^5.3.3"
+  }
+}

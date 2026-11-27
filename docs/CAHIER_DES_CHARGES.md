@@ -35,7 +35,8 @@ Ces constats sont issus d’une première inspection des dossiers locaux. La pha
 - Reproduire immédiatement tous les exercices et toutes les fonctions de l’ancien site.
 - Reproduire immédiatement toutes les fonctions d’un éventuel ancien système de comptes, de classes et de suivi ; les fonctions du nouveau projet sont définies dans ce cahier des charges et déployées par étapes.
 - Faire dépendre l’affichage public des exercices d’un appel réseau à la base de données.
-- Ajouter des fonctions d’IA, de messagerie, de publicité ou de collecte de données personnelles non nécessaires à l’apprentissage.
+- Ajouter au MVP un tuteur LLM personnifié par un avatar 3D animé. Cette piste sera étudiée après validation du MVP, avec une attention particulière aux usages pédagogiques, au coût et au fonctionnement sur appareils modestes.
+- Ajouter de la messagerie, de la publicité ou de la collecte de données personnelles non nécessaires à l’apprentissage.
 - Inclure CAP dans le périmètre de la première version, sauf décision ultérieure.
 
 ## 5. Publics et besoins
@@ -125,8 +126,9 @@ Ces constats sont issus d’une première inspection des dossiers locaux. La pha
 - Pages, catalogue et métadonnées pré-rendables autant que possible. Les composants interactifs des exercices s’exécutent côté navigateur.
 - Moteur partagé pour le cadre commun : consigne, aides, validation, retour, progression locale et instrumentation.
 - Exercices organisés par familles pédagogiques et interactives. Chaque famille peut avoir son propre composant ou moteur ; ne pas forcer une abstraction générique avant d’avoir porté plusieurs exercices représentatifs.
-- Métadonnées et contenu pédagogique versionnés dans le dépôt sous des formats contrôlables (JSON/TypeScript/Markdown selon le besoin). La base n’est pas la source de vérité pour le catalogue public.
-- Le catalogue relie les activités à une notion, à une famille d'activité (exercice Mathenpoche ou jeu sérieux), à un rôle adapté au parcours (conceptualisation initiale, entraînement, réinvestissement contextualisé) et à un profil de difficulté scolaire indépendant de l'archive source.
+- Le curriculum est décrit par un graphe pédagogique versionné dans Git : domaines, sous-parcours, notions, prérequis, activités et relations d’apprentissage. Les métadonnées restent éditables et contrôlables dans le dépôt ; la base n’est pas la source de vérité du catalogue public.
+- Les parcours peuvent être traversés depuis plusieurs points (domaine, notion ou activité) et associent les activités à leurs objectifs, types, rôles pédagogiques, profils de difficulté, prérequis et statuts de portage. Les recommandations adaptatives s’appuient progressivement sur ces relations et sur les résultats disponibles, sans rendre l’accès anonyme dépendant d’une base.
+- Le graphe ne signifie pas que toutes les notions ou relations sont déjà validées : elles sont ajoutées par étapes et relues avec des enseignants. La première livraison utilise cette structure pour relier Numération → Nombres entiers naturels → exercice pilote.
 - Images, sons et autres ressources utilisées par les exercices servis depuis l’application ou un stockage adapté, avec attribution et optimisation.
 
 ### Supabase sur Coolify
@@ -205,9 +207,9 @@ Un lecteur Ruffle peut servir à comparer ou consulter temporairement les ancien
 
 ### Phase 1 — prototype pédagogique
 
-- Définir un parcours différencié autour des nombres naturels : jeu de conceptualisation initiale inspiré de la TSD pour le CP ; exercice 2 de Numérique, chapitre 1, série 1 de l'archive 6e utilisé avec les profils CP à 6e ; jeu contextualisé de vie courante pour les niveaux plus avancés, dont le modèle est distinct du jeu CP. La fiche de l'exercice est dans [`PILOTE-6E-CHAP1-SERIE1-EXO2.md`](PILOTE-6E-CHAP1-SERIE1-EXO2.md) ; les deux jeux ont des fiches de conception séparées.
-- Créer le squelette Next.js, le catalogue, le gabarit d’exercice et un premier portage HTML5, comprenant les deux modes et les profils de difficulté configurables prévus pour le pilote.
-- Définir le catalogue et les parcours différenciés par notion et niveau d'études, avec des résultats d'entraînement distincts des traces de réinvestissement en contexte.
+- Prototype en cours dans le dépôt `fork-mathenpoche` : graphe de domaines et sous-parcours, page d'accueil et premier portage 2D de l'exercice 2 de Numérique, chapitre 1, série 1. Le CP/CE1/CE2/CM1/CM2/6e est sélectionnable comme profil de difficulté, séparé du niveau de provenance de l'exercice.
+- Comparer ce portage aux captures, vidéos, pages sources et scripts ActionScript extraits ; ajuster les règles de génération, le feedback, l'aide, le tableau de numération, les modes et le score conformément à la fiche [`PILOTE-6E-CHAP1-SERIE1-EXO2.md`](PILOTE-6E-CHAP1-SERIE1-EXO2.md).
+- Le jeu de conceptualisation CP inspiré de Brousseau et le jeu immersif des niveaux suivants ne font pas partie de ce premier lot. L'authentification Supabase et les tableaux de bord sont également reportés.
 - Mesurer poids, affichage mobile, usage clavier/tactile, animations du starter et comportement sur connexion lente.
 - Ne pas activer le suivi individuel réel à ce stade ; définir toutefois le contrat de données des tentatives et les besoins des deux tableaux de bord pour éviter une migration coûteuse.
 
