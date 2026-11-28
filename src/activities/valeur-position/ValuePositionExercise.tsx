@@ -115,7 +115,7 @@ function NumerationTable({
   )
 }
 
-export function ValuePositionExercise() {
+export function ValuePositionExercise({ returnHref = '/parcours/numeration/nombres-entiers-naturels/entrainement' }: { returnHref?: string }) {
   const [phase, setPhase] = useState<Phase>('setup')
   const [profile, setProfile] = useState<StudyProfileId>('CP')
   const [mode, setMode] = useState<ExerciseMode>('training')
@@ -134,6 +134,7 @@ export function ValuePositionExercise() {
   const [cleanAnswerStreak, setCleanAnswerStreak] = useState(0)
   const [remainingSeconds, setRemainingSeconds] = useState(0)
   const [timeExpired, setTimeExpired] = useState(false)
+  const [timedTraining, setTimedTraining] = useState(false)
   const answerInputRef = useRef<HTMLInputElement>(null)
   const nextButtonRef = useRef<HTMLButtonElement>(null)
 
@@ -152,7 +153,7 @@ export function ValuePositionExercise() {
     setIsLocked(false)
     setFeedback({ text: '', tone: 'neutral' })
     setTimeExpired(false)
-    setRemainingSeconds(mode === 'assessment' ? assessmentDurationSeconds(profile) : 0)
+    setRemainingSeconds(mode === 'assessment' || timedTraining ? assessmentDurationSeconds(profile) : 0)
     setQuestion(generateQuestion(profile, getQuestionDifficulty(mode, 0, profile, 0)))
     setPhase('playing')
   }
@@ -182,17 +183,17 @@ export function ValuePositionExercise() {
   }, [autoAdvance, phase, advance])
 
   useEffect(() => {
-    if (phase !== 'playing' || mode !== 'assessment' || remainingSeconds <= 0 || results.length >= questionCount) return
+    if (phase !== 'playing' || (mode !== 'assessment' && !timedTraining) || remainingSeconds <= 0 || results.length >= questionCount) return
     const timer = window.setTimeout(() => setRemainingSeconds((seconds) => seconds - 1), 1000)
     return () => window.clearTimeout(timer)
-  }, [phase, mode, remainingSeconds, results.length])
+  }, [phase, mode, timedTraining, remainingSeconds, results.length])
 
   useEffect(() => {
-    if (phase === 'playing' && mode === 'assessment' && remainingSeconds === 0 && results.length < questionCount) {
+    if (phase === 'playing' && (mode === 'assessment' || timedTraining) && remainingSeconds === 0 && results.length < questionCount) {
       setTimeExpired(true)
       setPhase('results')
     }
-  }, [phase, mode, remainingSeconds, results.length])
+  }, [phase, mode, timedTraining, remainingSeconds, results.length])
 
   const submitAnswer = (event: FormEvent<HTMLFormElement>) => {
     event.preventDefault()
@@ -277,7 +278,7 @@ export function ValuePositionExercise() {
     return (
       <main className="exercise-shell">
         <header className="exercise-topbar">
-          <Link className="back-link" href="/">← <span>Parcours</span></Link>
+          <Link className="back-link" href={returnHref}>← <span>Retour aux activités</span></Link>
           <span className="topbar-activity">Numération <span>·</span> Nombres entiers naturels</span>
         </header>
         <section className="setup-card">
@@ -293,18 +294,22 @@ export function ValuePositionExercise() {
               <label className={`mode-option ${mode === 'training' ? 'selected' : ''}`}>
                 <input type="radio" name="mode" checked={mode === 'training'} onChange={() => setMode('training')} />
                 <span className="mode-icon" aria-hidden="true">↻</span>
-                <span><strong>Entraînement</strong><small>Aide, tableau de numération et difficulté progressive.</small></span>
+                <span><strong>Entraînement</strong><small>Le tableau reste disponible. Le chronomètre est facultatif pour t’aider à repérer chaque colonne.</small></span>
               </label>
               <label className={`mode-option ${mode === 'assessment' ? 'selected' : ''}`}>
                 <input type="radio" name="mode" checked={mode === 'assessment'} onChange={() => setMode('assessment')} />
                 <span className="mode-icon assessment-icon" aria-hidden="true">◷</span>
-                <span><strong>Évaluation</strong><small>10 questions, sans aide, avec chronomètre de {profile === 'CP' || profile === 'CE1' || profile === 'CE2' ? '15' : '10'} minutes.</small></span>
+                <span><strong>Évaluation</strong><small>10 questions, sans aide ni tableau, avec un chronomètre global de {profile === 'CP' || profile === 'CE1' || profile === 'CE2' ? '15' : '10'} minutes.</small></span>
               </label>
             </div>
           </fieldset>
+          <label className={`timer-option ${mode === 'assessment' ? 'timer-option-fixed' : ''}`}>
+            <input type="checkbox" checked={mode === 'assessment' || timedTraining} disabled={mode === 'assessment'} onChange={(event) => setTimedTraining(event.target.checked)} />
+            <span><strong>Activer un temps limite global</strong><small>{mode === 'assessment' ? `Activé automatiquement : ${profile === 'CP' || profile === 'CE1' || profile === 'CE2' ? '15' : '10'} minutes pour la session.` : `Optionnel : ${profile === 'CP' || profile === 'CE1' || profile === 'CE2' ? '15' : '10'} minutes pour toute la session.`}</small></span>
+          </label>
           <div className="setup-summary">
             <span className="summary-mark">10</span>
-            <p><strong>10 questions · 1 point par question</strong><br />Une seule erreur peut être corrigée. Deux erreurs sur la même question ne donnent pas son point.</p>
+            <p><strong>10 questions · 1 point par question</strong><br />Une seule erreur peut être corrigée. À partir de 8/10 bonnes réponses (80 %), le niveau est considéré comme acquis.</p>
           </div>
           <button className="button button-primary button-wide" onClick={start} type="button">Commencer l’exercice <span aria-hidden="true">→</span></button>
         </section>
@@ -320,7 +325,7 @@ export function ValuePositionExercise() {
     return (
       <main className="exercise-shell">
         <header className="exercise-topbar">
-          <Link className="back-link" href="/">← <span>Parcours</span></Link>
+          <Link className="back-link" href={returnHref}>← <span>Retour aux activités</span></Link>
           <span className="topbar-activity">Numération <span>·</span> Résultats</span>
         </header>
         <section className="results-card">
@@ -334,7 +339,7 @@ export function ValuePositionExercise() {
           {mode === 'assessment' && <p className={`validation-note ${validated ? 'validated' : ''}`}>{validated ? `Niveau ${profile} validé pour cet exercice.` : `Niveau ${profile} non validé. Entraîne-toi puis refais une évaluation complète.`}</p>}
           <div className="results-meta"><span>{profile}</span><span>{mode === 'training' ? 'Entraînement' : 'Évaluation'}</span><span>{results.length}/10 questions traitées</span></div>
           <div className="result-actions"><button className="button button-primary" onClick={start} type="button">Recommencer</button><button className="button button-secondary" onClick={restart} type="button">Changer les réglages</button></div>
-          <Link className="result-back-link" href="/">Retour aux parcours</Link>
+          <Link className="result-back-link" href={returnHref}>Retour aux activités</Link>
         </section>
       </main>
     )
@@ -360,7 +365,7 @@ export function ValuePositionExercise() {
 
       <section className="question-card">
         <div className="question-card-top"><span className="question-label">Question n°{currentQuestionNumber}</span>
-          {mode === 'assessment' && <span className={`timer ${remainingSeconds <= 60 ? 'urgent' : ''}`} aria-live="polite"><span aria-hidden="true">◷</span> {formatTime(remainingSeconds)}<span className="visually-hidden"> sur {formatTime(maxTime)}</span></span>}
+          {(mode === 'assessment' || timedTraining) && <span className={`timer ${remainingSeconds <= 60 ? 'urgent' : ''}`} aria-live="polite"><span aria-hidden="true">◷</span> {formatTime(remainingSeconds)}<span className="visually-hidden"> sur {formatTime(maxTime)}</span></span>}
           {mode === 'training' && <span className="difficulty-indicator">Difficulté <span>{Math.min(trainingDifficulty + 1, maxDifficulty + 1)} / {maxDifficulty + 1}</span></span>}
         </div>
         <div className="question-prompt">Dans le nombre <strong>{formatNumber(question.number)}</strong>, le chiffre des <button className="place-link" type="button" onClick={() => mode === 'training' && setShowTable(true)}>{question.placeName}</button> est…</div>
